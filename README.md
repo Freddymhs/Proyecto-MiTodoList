@@ -5,7 +5,6 @@
 `se asume que trabajae con frameworks css o css puro `
 `se asume que siempre intentare trabajar con ATOMIC DESIGN en todas mis apps`
 
-
 ////////////////////////////////////////////
 
 #operaciones del TODOLIST
@@ -36,7 +35,7 @@ props statusbar?
 maquetacion de componente reutilizables dentro de la APP
 defini unos colores
 https://codepen.io/unfixed92/pen/pobVwOo
-flex no funciona en scrollview area , logre usar su propia PROP 'contentContainerStyle={{flex:1}}'  
+flex no funciona en scrollview area , logre usar su propia PROP 'contentContainerStyle={{flex:1}}'
 
 02/11/2020 implementando login firebase
 cree el proyecto web en https://firebase.google.com/
@@ -51,5 +50,31 @@ hoy hice de forma manual el ingreso , pero era mas codigo asi que lo hice basado
 agrege conexion a firebase con auth
 
 
+#usar ENV de forma facil en reacnative
+https://medium.com/just1and0/how-to-setup-env-file-in-your-react-native-application-2f760d806e02
+
+yarn add react-native-dotenv
+
+https://github.com/zetachang/react-native-dotenv
 
 
+
+........aca comienza
+npm i react-native-dotenv
+///////////
+crea .babelrc 
+pega
+{
+  "plugins": [
+    ["module:react-native-dotenv"]
+  ]
+}
+/////////////
+crear .env
+API_URL=https://api.example.org
+API_TOKEN=abc123
+//////////
+importarlo y usarlo
+import {API_URL, API_TOKEN} from "@env"
+console.log{API_URL}
+////////////

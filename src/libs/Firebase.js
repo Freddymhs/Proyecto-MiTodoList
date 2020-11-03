@@ -1,3 +1,8 @@
+import {API_FIREBASE} from '@env';
+
+
+
+
 //importando FIREBASE y algunos de sus MODULOS
 //Los modulos permiten =autenticacion ,reatime database, firestore y otros que se ven en la pagina web
 import * as firebase from 'firebase'; // impartamos lo instalado 'yarn add firebase'
@@ -8,7 +13,7 @@ try {
   firebase.initializeApp({
     // se inicializare FIREBASE
     //env
-    apiKey: '',
+    apiKey: API_FIREBASE,
     authDomain: 'mitodolist-3cee1.firebaseapp.com',
     databaseURL: 'https://mitodolist-3cee1.firebaseio.com',
     projectId: 'mitodolist-3cee1',

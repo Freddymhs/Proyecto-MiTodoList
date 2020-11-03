@@ -1,3 +1,4 @@
+
 import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
@@ -11,7 +12,7 @@ import {
 // mis componentes
 import PresentacionApp from './src/pages/PreIngreso/PresentacionAPP';
 import AppToDo from './src/pages/Ingreso/AppToDo';
-//componente DB
+
 import firebase from './src/libs/Firebase';
 import {
   IngresarFBauth,
@@ -19,6 +20,8 @@ import {
   UsrValido,
   setUsrValido,
 } from './src/Metodos/paraFirebaseAuth';
+
+
 
 export default function App() {
   const [UsrSession, setUsrSession] = useState(null);
