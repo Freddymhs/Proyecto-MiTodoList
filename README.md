@@ -38,7 +38,18 @@ defini unos colores
 https://codepen.io/unfixed92/pen/pobVwOo
 flex no funciona en scrollview area , logre usar su propia PROP 'contentContainerStyle={{flex:1}}'  
 
-creo que tendre que usar firebase para evitarme el uso de storage local y quizas puedo agregar nuevos usuarios
+02/11/2020 implementando login firebase
+cree el proyecto web en https://firebase.google.com/
+agregue firebase por yarn
+
+estoy usando firebase para logearme , ahora es solo para mi correo
+
+aun nose si sera la app solo para mi o permitire ingreso de otros usuarios ingresen.
+
+hoy hice de forma manual el ingreso , pero era mas codigo asi que lo hice basado en el authOnchange para simplificar y movi los metodos a otro archivo porque me molesta leer tantos.
+
+agrege conexion a firebase con auth
+
 
 
 

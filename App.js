@@ -1,13 +1,4 @@
-/**
- * Developer : FmarcosDev
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,29 +6,45 @@ import {
   View,
   Text,
   StatusBar,
+  Alert,
 } from 'react-native';
-
 // mis componentes
-
 import PresentacionApp from './src/pages/PreIngreso/PresentacionAPP';
 import AppToDo from './src/pages/Ingreso/AppToDo';
+//componente DB
+import firebase from './src/libs/Firebase';
+import {
+  IngresarFBauth,
+  SalirFBauth,
+  UsrValido,
+  setUsrValido,
+} from './src/Metodos/paraFirebaseAuth';
 
-const App: () => React$Node = () => {
-  const [Ingreso, setIngreso] = useState(false);
-  const SwapScreen = () => {
-    setIngreso(!Ingreso);
-  };
+export default function App() {
+  const [UsrSession, setUsrSession] = useState(null);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((response) => {
+      setUsrSession(response);
+    });
+  }, [setUsrSession]);
+
   return (
     <>
-      {Ingreso != true ? (
-        <PresentacionApp SwapScreen={SwapScreen} />
+      {UsrSession == null ? (
+        <PresentacionApp
+          IngresarFBauth={IngresarFBauth}
+          setUsrSession={setUsrSession}
+        />
       ) : (
-        <AppToDo />
+        <AppToDo
+          SalirFBauth={SalirFBauth}
+          setUsrSession={setUsrSession}
+          UsrSession={UsrSession}
+        />
       )}
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({});
-
-export default App;

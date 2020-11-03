@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import firebase from '../../libs/Firebase';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
 import SafeAreav2, {
   ViewMedio,
   ViewSmall,
@@ -38,12 +39,27 @@ const MisConocimientos = [
   'css',
 ];
 var id = 0;
-export default function AppToDo() {
+
+export default function AppToDo(props) {
+  const {UsrSession} = props;
+
+  console.log(
+    ' aca obtener todos los datos personales de 1 USUARIO el que se logeo por su UID',
+  );
+  // aca obtener todos los datos personales de 1 USUARIO el que se logeo por su UID
+
+  const {SalirFBauth, setUsrSession} = props;
+
   return (
     <>
       <StatusBarv2 />
       <SafeAreav2>
         <ViewMedio>
+          <Pressable
+            onPress={() => SalirFBauth({setUsrSession})}
+            style={{height: 100, width: 300, backgroundColor: 'red'}}>
+            <Text>I'm pressable!</Text>
+          </Pressable>
           <FlatList
             data={ProyectosPendientes}
             renderItem={({item}) => (

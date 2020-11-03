@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Pressable,
   SafeAreaView,
@@ -8,9 +8,14 @@ import {
   TouchableHighlight,
   View,
   Image,
+  TextInput,
 } from 'react-native';
+import firebase from '../../libs/Firebase';
+import {IngresarFBauth} from '../../Metodos/paraFirebaseAuth';
 
-export default function PresentacionAPP({SwapScreen}) {
+export default function PresentacionAPP(props) {
+  const {IngresarFBauth, setUsrSession} = props;
+
   return (
     <>
       <StatusBar hidden />
@@ -37,11 +42,29 @@ export default function PresentacionAPP({SwapScreen}) {
               Agrega todos los proyectos completados al Portafolios
             </Text>
           </View>
+
           <View style={styles.MediaPantalla}>
+            <View style={styles.areaInputs}>
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Correo Electronico"
+                placeholderTextColor="#9a73ef"
+                autoCapitalize="none"
+                // onChangeText={this.handleEmail}
+              />
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Contraseña"
+                placeholderTextColor="#9a73ef"
+                autoCapitalize="none"
+                // onChangeText={this.handleEmail}
+              />
+            </View>
+
             <Pressable
-              onPress={() => {
-                SwapScreen();
-              }}
+              onPress={() => IngresarFBauth({setUsrSession})}
               style={styles.btnpressable}>
               <Text style={styles.txtPressable}>ingresar</Text>
             </Pressable>
@@ -53,6 +76,18 @@ export default function PresentacionAPP({SwapScreen}) {
 }
 
 const styles = StyleSheet.create({
+  areaInputs: {
+    flexDirection: 'row',
+    backgroundColor: 'blue',
+  },
+  input: {
+    backgroundColor: 'white',
+    width: '50%',
+    borderColor: 'black',
+    borderWidth: 1,
+    textAlign: 'center',
+    justifyContent: 'flex-end',
+  },
   txtPressable: {
     color: '#E91E63',
     fontWeight: 'bold',
