@@ -1,4 +1,3 @@
-
 import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
@@ -19,9 +18,7 @@ import {
   SalirFBauth,
   UsrValido,
   setUsrValido,
-} from './src/Metodos/paraFirebaseAuth';
-
-
+} from './src/Modelo/FuncionesFirebaseAuth';
 
 export default function App() {
   const [UsrSession, setUsrSession] = useState(null);
@@ -29,6 +26,10 @@ export default function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((response) => {
       setUsrSession(response);
+      // console.log(response.uid);
+
+
+
     });
   }, [setUsrSession]);
 
@@ -51,3 +52,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({});
+
+
+
+
+
+
+

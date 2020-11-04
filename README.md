@@ -22,7 +22,7 @@ setting : 1- CREA mis Areas de Interes
 
 #Creacion de Proyectos a trabajar.
 1- Agregar 'NOMBRE' Proyecto 'RELACIONADO a una PLATAFORMA'//con cual lo vas a hacer?
-2- Seleccionas 1 o 2 areas para este proyecto. // elige 2 areas pls
+2- Seleccionas 1 o 2 areas para este proyecto. // elige 3 areas maximo pls
 2- agregar PROYECTO realizonadas a mis areas de interes // este proyecto se apega a alguna de sus areas de interes?
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,32 +49,10 @@ hoy hice de forma manual el ingreso , pero era mas codigo asi que lo hice basado
 
 agrege conexion a firebase con auth
 
+03/11/2020
+usar ENV de forma facil en reacnative -> https://www.npmjs.com/package/react-native-dotenv
 
-#usar ENV de forma facil en reacnative
-https://medium.com/just1and0/how-to-setup-env-file-in-your-react-native-application-2f760d806e02
+voy a leer los datos por UID que tiene el correo en firebase
+voy a mostrar todo su contenido
 
-yarn add react-native-dotenv
-
-https://github.com/zetachang/react-native-dotenv
-
-
-
-........aca comienza
-npm i react-native-dotenv
-///////////
-crea .babelrc 
-pega
-{
-  "plugins": [
-    ["module:react-native-dotenv"]
-  ]
-}
-/////////////
-crear .env
-API_URL=https://api.example.org
-API_TOKEN=abc123
-//////////
-importarlo y usarlo
-import {API_URL, API_TOKEN} from "@env"
-console.log{API_URL}
-////////////
+voy a registrar usuarios.....en la basedatos x uid

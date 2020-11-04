@@ -7,6 +7,7 @@ import {API_FIREBASE} from '@env';
 //Los modulos permiten =autenticacion ,reatime database, firestore y otros que se ven en la pagina web
 import * as firebase from 'firebase'; // impartamos lo instalado 'yarn add firebase'
 import '@firebase/auth'; // modulo extra que quiero usar ahora para revisar mi conexion
+import '@firebase/database';
 
 //intentar inicializar FIREBASE
 try {

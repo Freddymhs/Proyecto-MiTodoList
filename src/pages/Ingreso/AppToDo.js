@@ -17,7 +17,7 @@ const QueAreaobjetivos = [
   'testUnitarios',
   'Disenio',
   'CRUD',
-  'State Page',
+  'Static Page',
   'Microservicios',
   'Consumo de APIs',
   'app Celular',
@@ -42,11 +42,6 @@ var id = 0;
 
 export default function AppToDo(props) {
   const {UsrSession} = props;
-
-  console.log(
-    ' aca obtener todos los datos personales de 1 USUARIO el que se logeo por su UID',
-  );
-  // aca obtener todos los datos personales de 1 USUARIO el que se logeo por su UID
 
   const {SalirFBauth, setUsrSession} = props;
 

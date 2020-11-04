@@ -11,7 +11,15 @@ import {
   TextInput,
 } from 'react-native';
 import firebase from '../../libs/Firebase';
-import {IngresarFBauth} from '../../Metodos/paraFirebaseAuth';
+import {IngresarFBauth} from '../../Modelo/FuncionesFirebaseAuth';
+
+//clase usuario
+import ClsUsuario from '../../../src/Modelo/ClsUsuario';
+
+//CREACION DE DATOS UUSARIO
+const Obj = new ClsUsuario();
+
+console.log(Obj)
 
 export default function PresentacionAPP(props) {
   const {IngresarFBauth, setUsrSession} = props;
