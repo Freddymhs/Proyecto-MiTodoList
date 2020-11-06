@@ -20,25 +20,56 @@ export default function paraFirebaseAuth() {
 export const SalirFBauth = (props) => {
   firebase.auth().signOut();
 };
-
+// INGRESANDO en firebase
 export const IngresarFBauth = (props) => {
-  // console.log('INGRESAAAA');
-  var email = 'correofalso@gmail.com';
-  var password = '123456789';
+  var email = props.email;
+  var password = props.password;
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(
-      (response) => {
-        if (ExisteUIDenDB(response.user.uid) == null) {
-          console.log('no existe este usuario , no se va a  hacer nada?');
-        } else {
-          console.log('existe el usuario hay que cargar sus datos');
-        }
-      },
-      // firebase.auth().currentUser  !== null ? console.log(firebase.auth().currentUser): console.log(firebase.auth().currentUser)
-    );
+    // .then(
+    //   (response) => {
+    //     if (ExisteUIDenDB(response.user.uid) == null) {
+    //       console.log('no existe este usuario , no se va a  hacer nada?');
+    //     } else {
+    //       console.log('existe el usuario hay que cargar sus datos');
+    //     }
+    //   }
+    // )
+    .catch((error) => {
+      Alert.alert(error.toString());
+    });
+
+  // firebase.auth().currentUser  !== null ? console.log(firebase.auth().currentUser): console.log(firebase.auth().currentUser)
 };
+
+//usuario tiene su CONFIGURACION areas,platforms,skills DEFINIDOS?
+export const ConfigPerfilUsuario = (uid, setObjUSR) => {
+  firebase
+    .database()
+    .ref('/usuarios/' + uid + '/Areas')
+    .once('value', function (snapshot) {
+      setObjUSR(snapshot.val());
+    });
+};
+
+//usuario registrado en db?
+export const ExisteUIDenDB = (uid, setObjUSR) => {
+  firebase
+    .database()
+    .ref('/usuarios/')
+    .child(uid)
+    .once('value', function (snapshot) {
+      setObjUSR(snapshot.val());
+    });
+};
+
+// uid actual del usuario ?
+export const UIDcurrentUser = () => {
+  return firebase.auth().currentUser.uid;
+};
+
+// creamos usuario en BD con su UID
 export const CreandoUsuarioFB = (user) => {
   firebase
     .database()
@@ -47,40 +78,4 @@ export const CreandoUsuarioFB = (user) => {
       uid: user.uid,
       email: user.email,
     });
-};
-
-export const UIDcurrentUser = () => {
-  return firebase.auth().currentUser.uid;
-};
-
-export const ExisteUIDenDB = (uid) => {
-  return firebase
-    .database()
-    .ref('/usuarios/' + uid)
-    .once('value', (snapshot) => {
-      console.log(snapshot.val());
-    });
-
-  // return firebase.database().
-  // ref('/usuarios/' + '2163871638912')
-
-  // firebase
-  //   .database()
-  //   .ref('/usuarios/' + '-----')
-  //   .once('value', (snapshot) => {
-  //     if (snapshot.val() == null) {
-  //       return false;
-  //     } else {
-  //       return true;
-  //     }
-  //   });
-
-  // firebase
-  //   .database()
-  //   .ref('/usuarios/' + 'bmJEC20Zo9fYXENHKABpd6hktFL2')
-  //   .once('value', (snapshot) => {
-  //     snapshot.forEach((element) => {
-  //       console.log('hola');
-  //     });
-  //   });
 };

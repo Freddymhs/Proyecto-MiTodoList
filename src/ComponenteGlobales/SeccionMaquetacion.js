@@ -1,6 +1,7 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
+//////////////////////////////////////////////////////////////////////////////////
 // base de la pages
 export const SafeAreav2 = (props) => {
   return (
@@ -44,10 +45,34 @@ export const ViewBig = (props) => {
   return <View style={styles.viewbig}>{props.children}</View>;
 };
 /////////////////////////////////////////
+export const ViewCFG = (props) => {
+  return <View style={styles.ViewConfigUser}>{props.children}</View>;
+};
 
 export default SafeAreav2;
 
 const styles = StyleSheet.create({
+  ViewConfigUser: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey',
+
+    borderWidth: 0,
+    flex: 10,
+    marginVertical: 2,
+    paddingHorizontal: 17,
+    paddingVertical: 22,
+    // shadow
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 9,
+  },
+  ///////////////////////////////////totales
   SafeAreaFull: {
     padding: 5,
     flex: 1,

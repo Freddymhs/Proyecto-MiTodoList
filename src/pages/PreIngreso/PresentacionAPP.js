@@ -19,10 +19,12 @@ import ClsUsuario from '../../../src/Modelo/ClsUsuario';
 //CREACION DE DATOS UUSARIO
 const Obj = new ClsUsuario();
 
-console.log(Obj)
+console.log(Obj); 
 
 export default function PresentacionAPP(props) {
   const {IngresarFBauth, setUsrSession} = props;
+  const {ActualizaFormulario} = props;
+  const {Formulario} = props;
 
   return (
     <>
@@ -31,7 +33,6 @@ export default function PresentacionAPP(props) {
         <View style={styles.PantallaFull}>
           <View style={styles.MediaPantalla}>
             <Text style={styles.letras}>Mi Todo List APP</Text>
-
             <Image
               style={{
                 width: 120,
@@ -54,6 +55,9 @@ export default function PresentacionAPP(props) {
           <View style={styles.MediaPantalla}>
             <View style={styles.areaInputs}>
               <TextInput
+                // onChange={(ev) => ActualizaFormulario(ev)}
+                // onChangeText={text => ActualizaFormulario(text)}
+                onChangeText={(value) => ActualizaFormulario('email', value)}
                 style={styles.input}
                 underlineColorAndroid="transparent"
                 placeholder="Correo Electronico"
@@ -62,6 +66,7 @@ export default function PresentacionAPP(props) {
                 // onChangeText={this.handleEmail}
               />
               <TextInput
+                onChangeText={(value) => ActualizaFormulario('password', value)}
                 style={styles.input}
                 underlineColorAndroid="transparent"
                 placeholder="Contraseña"
@@ -72,7 +77,7 @@ export default function PresentacionAPP(props) {
             </View>
 
             <Pressable
-              onPress={() => IngresarFBauth({setUsrSession})}
+              onPress={() => IngresarFBauth(Formulario)}
               style={styles.btnpressable}>
               <Text style={styles.txtPressable}>ingresar</Text>
             </Pressable>

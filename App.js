@@ -15,23 +15,33 @@ import AppToDo from './src/pages/Ingreso/AppToDo';
 import firebase from './src/libs/Firebase';
 import {
   IngresarFBauth,
-  SalirFBauth,
   UsrValido,
   setUsrValido,
 } from './src/Modelo/FuncionesFirebaseAuth';
+import AppCheckData from './src/pages/Ingreso/AppCheckData';
 
 export default function App() {
+  //////////////////session
   const [UsrSession, setUsrSession] = useState(null);
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((response) => {
       setUsrSession(response);
       // console.log(response.uid);
-
-
-
+      console.log(response.uid);
     });
-  }, [setUsrSession]);
+  }, [UsrSession]);
+
+  ///////////formulario
+  const [Formulario, setFormulario] = useState({
+    email: 'nombre',
+    password: 'dada',
+  });
+
+  const ActualizaFormulario = (type, value) => {
+    setFormulario({...Formulario, [type]: value});
+  };
+  //////////////DATOS PERSONALES DEL USUARIO
+  const [ObjUSR, setObjUSR] = useState();
 
   return (
     <>
@@ -39,23 +49,14 @@ export default function App() {
         <PresentacionApp
           IngresarFBauth={IngresarFBauth}
           setUsrSession={setUsrSession}
+          ActualizaFormulario={ActualizaFormulario}
+          Formulario={Formulario}
         />
       ) : (
-        <AppToDo
-          SalirFBauth={SalirFBauth}
-          setUsrSession={setUsrSession}
-          UsrSession={UsrSession}
-        />
+        <AppCheckData ObjUSR={ObjUSR} setObjUSR={setObjUSR} />
       )}
     </>
   );
 }
 
 const styles = StyleSheet.create({});
-
-
-
-
-
-
-

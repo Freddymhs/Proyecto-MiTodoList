@@ -12,6 +12,7 @@ import SafeAreav2, {
 import FlatHorizontal from '../../ComponenteGlobales/FlatHorizontal';
 import {Subtitulo} from '../../ComponenteGlobales/Textos';
 // import ScrollViewv2 from '../../ComponenteGlobales/ScrollViewv2';
+import {SalirFBauth} from '../../Modelo/FuncionesFirebaseAuth';
 
 const QueAreaobjetivos = [
   'testUnitarios',
@@ -42,8 +43,7 @@ var id = 0;
 
 export default function AppToDo(props) {
   const {UsrSession} = props;
-
-  const {SalirFBauth, setUsrSession} = props;
+  const {setUsrSession} = props;
 
   return (
     <>
@@ -51,9 +51,10 @@ export default function AppToDo(props) {
       <SafeAreav2>
         <ViewMedio>
           <Pressable
-            onPress={() => SalirFBauth({setUsrSession})}
-            style={{height: 100, width: 300, backgroundColor: 'red'}}>
-            <Text>I'm pressable!</Text>
+            // onPress={() => SalirFBauth({setUsrSession})}
+            onPress={() => SalirFBauth()}
+            style={{height: 100, width: 400, backgroundColor: 'red'}}>
+            <Text>I'm pressable!EEEEEEEE</Text>
           </Pressable>
           <FlatList
             data={ProyectosPendientes}
@@ -98,7 +99,5 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'red',
     borderRadius: 6,
-    // backgroundColor: Colors.lighter,
-    // backgroundColor: 'red',
   },
 });
