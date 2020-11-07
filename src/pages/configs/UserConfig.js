@@ -15,7 +15,12 @@ import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 //   console.log('avanzar');
 // };
 
-const UserConfig = () => {
+const UserConfig = (props) => {
+  const {ObjGlobal} = props;
+
+
+  // console.log(ObjGlobal);
+
   const [Pantalla, setPantalla] = useState(0);
 
   useEffect(() => {
@@ -42,13 +47,13 @@ const UserConfig = () => {
               return <HolaMundo NextPage={NextPage} BackPage={BackPage} />;
             case 1:
               return (
-                <PantallaHabilidades NextPage={NextPage} BackPage={BackPage} />
+                <PantallaHabilidades ObjGlobal={ObjGlobal.SkillAPP} NextPage={NextPage} BackPage={BackPage} />
               );
             case 2:
-              return <PantallaAreas NextPage={NextPage} BackPage={BackPage} />;
+              return <PantallaAreas ObjGlobal={ObjGlobal.AreasAPP} NextPage={NextPage} BackPage={BackPage} />;
             case 3:
               return (
-                <PantallaPlataformas NextPage={NextPage} BackPage={BackPage} />
+                <PantallaPlataformas ObjGlobal={ObjGlobal.PlatformAPP} NextPage={NextPage} BackPage={BackPage} />
               );
             default:
               return <HolaMundo NextPage={NextPage} BackPage={BackPage} />;
@@ -87,7 +92,8 @@ const HolaMundo = ({NextPage, BackPage}) => {
   );
 };
 
-const PantallaHabilidades = () => {
+const PantallaHabilidades = (props) => {
+  console.log(props);
   return (
     <>
       <ViewSmall>
@@ -97,9 +103,10 @@ const PantallaHabilidades = () => {
             alignContent: 'center',
             textAlign: 'center',
           }}>
-          Habilidades
+          Habilidadeses
         </Text>
       </ViewSmall>
+
       <ViewCFG>
         <Pressable style={{backgroundColor: 'white'}}>
           <Text>Listado de Habilidades</Text>
@@ -109,7 +116,8 @@ const PantallaHabilidades = () => {
   );
 };
 
-const PantallaAreas = () => {
+const PantallaAreas = (props) => {
+  console.log(props);
   return (
     <>
       <ViewSmall>
@@ -130,7 +138,8 @@ const PantallaAreas = () => {
     </>
   );
 };
-const PantallaPlataformas = () => {
+const PantallaPlataformas = (props) => {
+  console.log(props);
   return (
     <>
       <ViewSmall>
@@ -151,6 +160,7 @@ const PantallaPlataformas = () => {
     </>
   );
 };
+
 const MenuFast = ({NextPage, BackPage}) => {
   return (
     <View style={{flexDirection: 'row'}}>

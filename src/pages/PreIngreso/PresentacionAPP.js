@@ -11,20 +11,22 @@ import {
   TextInput,
 } from 'react-native';
 import firebase from '../../libs/Firebase';
-import {IngresarFBauth} from '../../Modelo/FuncionesFirebaseAuth';
+import {
+  IngresarFBauth,
+  RegistroAuthFB,
+} from '../../Modelo/FuncionesFirebaseAuth';
 
 //clase usuario
 import ClsUsuario from '../../../src/Modelo/ClsUsuario';
 
 //CREACION DE DATOS UUSARIO
-const Obj = new ClsUsuario();
-
-console.log(Obj); 
+// const Obj = new ClsUsuario();
 
 export default function PresentacionAPP(props) {
-  const {IngresarFBauth, setUsrSession} = props;
+  const {IngresarFBauth} = props;
   const {ActualizaFormulario} = props;
   const {Formulario} = props;
+  const {setObjUSR} = props;
 
   return (
     <>
@@ -55,15 +57,12 @@ export default function PresentacionAPP(props) {
           <View style={styles.MediaPantalla}>
             <View style={styles.areaInputs}>
               <TextInput
-                // onChange={(ev) => ActualizaFormulario(ev)}
-                // onChangeText={text => ActualizaFormulario(text)}
                 onChangeText={(value) => ActualizaFormulario('email', value)}
                 style={styles.input}
                 underlineColorAndroid="transparent"
                 placeholder="Correo Electronico"
                 placeholderTextColor="#9a73ef"
                 autoCapitalize="none"
-                // onChangeText={this.handleEmail}
               />
               <TextInput
                 onChangeText={(value) => ActualizaFormulario('password', value)}
@@ -72,14 +71,19 @@ export default function PresentacionAPP(props) {
                 placeholder="Contraseña"
                 placeholderTextColor="#9a73ef"
                 autoCapitalize="none"
-                // onChangeText={this.handleEmail}
               />
             </View>
 
             <Pressable
               onPress={() => IngresarFBauth(Formulario)}
               style={styles.btnpressable}>
-              <Text style={styles.txtPressable}>ingresar</Text>
+              <Text style={styles.txtPressable}>Ingresar</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => RegistroAuthFB(Formulario)}
+              style={styles.btnpressable}>
+              <Text style={styles.txtPressable}>Registrarme</Text>
             </Pressable>
           </View>
         </View>

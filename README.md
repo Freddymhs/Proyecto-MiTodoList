@@ -54,15 +54,21 @@ usar ENV de forma facil en reacnative -> https://www.npmjs.com/package/react-nat
 registrar usuarios.....en la basedatos x uid
 buscar usuarios x uid en la db.
 al ingresar se revisa que exista su CONFIG sino se va a crear una.
--si es CONFIG no esta completado , ir crearlos con un menu
+
+06/11/2020
+obten los datos globales de DB
+si el AuthStateChanged revisar si existe o no
+guardar su UID , revisar que existe en DB
+leer su BD y si no tiene configuracion asignarlas en otra pantalla de 'USERCONFIG'
 
 
-///////////creacion de proyectos
 
+
+<!-- ///////////creacion de proyectos
 
 
 -si es APPtodolist
-voy a mostrar todo su contenido
+voy a mostrar todo su contenido -->
 
 
 

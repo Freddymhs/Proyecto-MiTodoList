@@ -1,34 +1,27 @@
+// existen areas , platafroasm, skills
+// AreasAPP  PlatformAPP SkillApp
+
 export default class ClsUsuario {
-  uid = '1111111111111111111111111111111111';
-  email = '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@';
-  AreaUSR = ['aaaa', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-  PlatformUSR = ['pl1', 'pl2', 'pl3', 'pl4'];
-  SkillUSR = ['javascript', 'php', 'x', 'x', 'd', 'q', 'w', 'e', 'ff'];
+  uid;
+  email;
+  AreaUSR = ['a1','a2','a3'];
+  PlatformUSR = [];
+  SkillUSR = [];
+
   ListadoProyectos = [
-    {
-      nombre: 'proyecto1',
-      PlataformaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      AreaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      SkillProyecto: ['a', 'b', 'c', 'd', 'e'],
-    },
-    {
-      nombre: 'proyecto2',
-      PlataformaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      AreaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      SkillProyecto: ['a', 'b', 'c', 'd', 'e'],
-    },
-    {
-      nombre: 'proyecto3',
-      PlataformaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      AreaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      SkillProyecto: ['a', 'b', 'c', 'd', 'e'],
-    },
-    {
-      nombre: 'proyecto4',
-      PlataformaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      AreaProyecto: ['a', 'b', 'c', 'd', 'e'],
-      SkillProyecto: ['a', 'b', 'c', 'd', 'e'],
-    },
+    {},
+    // {
+    //   nombre: 'proyecto1',
+    //   PlataformaProyecto: ['a', 'b', 'c', 'd', 'e'],
+    //   AreaProyecto: ['a', 'b', 'c', 'd', 'e'],
+    //   SkillProyecto: ['a', 'b', 'c', 'd', 'e'],
+    // },
+    // {
+    //   nombre: 'proyecto2',
+    //   PlataformaProyecto: ['a', 'b', 'c', 'd', 'e'],
+    //   AreaProyecto: ['a', 'b', 'c', 'd', 'e'],
+    //   SkillProyecto: ['a', 'b', 'c', 'd', 'e'],
+    // },
   ];
 
   // ListadoProyectos = [
