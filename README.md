@@ -61,24 +61,12 @@ si el AuthStateChanged revisar si existe o no
 guardar su UID , revisar que existe en DB
 leer su BD y si no tiene configuracion asignarlas en otra pantalla de 'USERCONFIG'
 
-
-
+07/11/2020
+agregado contenido grafico , de funcion , reuso de componentes para mostrar las opciones al usuario,
+luego debe agregar esto y subirlo para asignarlo a un usuario
 
 <!-- ///////////creacion de proyectos
 
 
 -si es APPtodolist
 voy a mostrar todo su contenido -->
-
-
-
-
-
-
-
-
-
-
-
-
-

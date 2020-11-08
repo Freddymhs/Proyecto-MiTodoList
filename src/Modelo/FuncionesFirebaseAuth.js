@@ -43,15 +43,6 @@ export const IngresarFBauth = (props) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    // .then(
-    //   (response) => {
-    //     if (ExisteUIDenDB(response.user.uid) == null) {
-    //       console.log('no existe este usuario , no se va a  hacer nada?');
-    //     } else {
-    //       console.log('existe el usuario hay que cargar sus datos');
-    //     }
-    //   }
-    // )
     .catch((error) => {
       Alert.alert(error.toString());
     });
@@ -70,7 +61,7 @@ export const IngresarFBauth = (props) => {
 // };
 
 //usuario tiene su CONFIGURACION areas,platforms,skills DEFINIDOS?
-
+//creo que esta funcion es basura
 export const ConfigPerfilUsuario = (uid, setObjUSR) => {
   firebase
     .database()
@@ -101,12 +92,9 @@ export const CreandoUsuarioFB = (user) => {
   firebase
     .database()
     .ref('usuarios/' + user.uid)
-    // .set({
-    //   uid: user.uid,
-    //   email: user.email,
-    // });
     .set(user);
 };
+
 // creamos usuario en BD con su UID
 export const AgregandoSettingEntorno = (user) => {
   firebase
@@ -122,17 +110,8 @@ export const TraerDatosFBConfig = (setGlobalData) => {
     .ref('DatosPlataforma/')
     .once('value', function (dataSnapshot) {
       setGlobalData(dataSnapshot.val());
-
-      // setdatos({
-      //   AreasAPP: dataSnapshot.child('AreasAPP'),
-      // });
-      // setdatos({
-      //   PlatformAPP: dataSnapshot.child('PlatformAPP'),
-      // });
-      // setdatos({
-      //   SkillAPP: dataSnapshot.child('SkillAPP'),
-      // });
-    });
+    })
+    .then(console.log('ya pedimos todos los datos'));
 };
 
 // firebase

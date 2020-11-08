@@ -28,61 +28,37 @@ import {
   CreandoUsuarioFB,
 } from './src/Modelo/FuncionesFirebaseAuth';
 import ClsUsuario from './src/Modelo/ClsUsuario';
-import ClsMiTodoList from './src/Modelo/ClsMiTodoList';
 
 export default function App() {
-  const usuario = new ClsUsuario();
   //////////////ALMACENAR DATOS DEL USUARIO
+  const usuario = new ClsUsuario();
   const [ObjUSR, setObjUSR] = useState();
-  const [ConfigState, setConfigState] = useState(false);
 
   //////////////////session para swap screens
   const [UsrSession, setUsrSession] = useState(null);
 
-  //Datos globals para configurar areas,plataformas,skills
-  const [GlobalData, setGlobalData] = useState({
-    PlatformAPP: [],
-    SkillAPP: [],
-    AreasAPP: [],
-  });
-
-  var ObjGlobal = new ClsMiTodoList();
   // firebase.auth().signOut();
   useEffect(() => {
     ////usuariio esta registraod en AUTH?
-    firebase.auth().onAuthStateChanged((response) => {
-      if (response == null) {
+    firebase.auth().onAuthStateChanged(function (response) {
+      if (!response) {
         console.log('aun no ah cambiado echo nadaa');
       } else {
-        console.log('logeaod en AUTH');
-
         // //guardamos su ID
         setUsrSession(response.uid);
 
-        // TRAEMOS LOS DATOS de la BD
+        // TRAEMOS sus datos de la BD
         ExisteUIDenDB(response.uid, setObjUSR);
-
-        // console.log(ObjUSR);
-        // console.log(response.email);
-
-        if (
-          ObjUSR.AreaUSR == undefined ||
-          ObjUSR.PlatformUSR == undefined ||
-          ObjUSR.SkillUSR == undefined
-        ) {
-          console.log(' usuario no tiene todos sus datos listos');
-          setConfigState(false);
-        } else {
-          console.log(' usuario listos');
-          setConfigState(true);
-        }
       }
-
-      //// Obten todos los datos para CONFIGURAR en cualquier momento
-      TraerDatosFBConfig(setGlobalData);
     });
-  }, [UsrSession]);
-  ObjGlobal = GlobalData;
+
+    //  esto se ejecuta siempre
+
+    // if (ObjUSR) {
+    //   console.log('sda');
+    //   // setConfigState(true)
+    // }
+  }, []);
 
   ////FORMULARIO
   const [Formulario, setFormulario] = useState({
@@ -94,21 +70,14 @@ export default function App() {
     setFormulario({...Formulario, [type]: value});
   };
 
+  // console.log(ObjUSR);
+  console.log('##################APP####################');
   return (
     <>
-      {/* {UsrSession == null ? (
-        <PresentacionApp
-          IngresarFBauth={IngresarFBauth}
-          setUsrSession={setUsrSession}
-          ActualizaFormulario={ActualizaFormulario}
-          Formulario={Formulario}
-          setObjUSR={setObjUSR}
-        />
-      ) : ConfigState ? (
-        <Text>x</Text>
-      ) : (
-        <Text>d</Text>
-      )} */}
+      {/* {console.log('su configuracion')}
+      {console.log(ConfigState)}
+      {console.log('datos de sesion')}
+      {console.log(UsrSession)} */}
       {UsrSession == null ? (
         <PresentacionApp
           IngresarFBauth={IngresarFBauth}
@@ -118,12 +87,31 @@ export default function App() {
           setObjUSR={setObjUSR}
         />
       ) : (
+        <>
+          <AppCheckData
+            ObjUSR={ObjUSR}
+            // GlobalData={GlobalData}
+
+            // setConfigState={setConfigState}
+          />
+        </>
+      )}
+
+      {/* {UsrSession == null ? (
+        <PresentacionApp
+          IngresarFBauth={IngresarFBauth}
+          setUsrSession={setUsrSession}
+          ActualizaFormulario={ActualizaFormulario}
+          Formulario={Formulario}
+          setObjUSR={setObjUSR}
+        />
+      ) : (
         <AppCheckData
-          ObjGlobal={ObjGlobal}
+          // GlobalData={GlobalData}
           ConfigState={ConfigState}
           setConfigState={setConfigState}
         />
-      )}
+      )} */}
     </>
   );
 }

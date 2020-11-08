@@ -26,7 +26,10 @@ export default function PresentacionAPP(props) {
   const {IngresarFBauth} = props;
   const {ActualizaFormulario} = props;
   const {Formulario} = props;
-  const {setObjUSR} = props;
+  // const {setObjUSR} = props;
+  const {setGlobalData} = props; // para ver si tiene config al logear simpre
+
+  console.log(setGlobalData);
 
   return (
     <>

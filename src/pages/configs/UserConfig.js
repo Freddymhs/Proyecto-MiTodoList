@@ -1,11 +1,24 @@
 import React, {Component, useEffect, useState} from 'react';
-import {Alert, Button, Pressable, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  Button,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableHighlight,
+  TouchableOpacity,
+} from 'react-native';
 import SafeAreav2, {
   ScrollViewv2,
   ViewBig,
   ViewMedio,
   ViewCFG,
   ViewSmall,
+  BtnAppPrimary,
+  Area2BtnInSmallView,
 } from '../../ComponenteGlobales/SeccionMaquetacion';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 
@@ -15,17 +28,14 @@ import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 //   console.log('avanzar');
 // };
 
+// state de el para agregarle sus datos
+// state de sus datos
+// const Actualizar
+
 const UserConfig = (props) => {
-  const {ObjGlobal} = props;
-
-
-  // console.log(ObjGlobal);
+  const {GlobalData} = props;
 
   const [Pantalla, setPantalla] = useState(0);
-
-  useEffect(() => {
-    console.log(Pantalla);
-  }, [Pantalla]);
   const NextPage = () => {
     if (Pantalla < 3) {
       return setPantalla(Pantalla + 1);
@@ -37,28 +47,52 @@ const UserConfig = (props) => {
     }
   };
 
+  // atributos de cada pantalla
+  const [Title, setTitle] = useState('default');
+  const [Lista, setLista] = useState([]);
+  const actualizarLista = () => {
+    console.log('actulizando la listaaaaaaaaaaaaaaaaaaaaaaaaaa');
+  };
+  useEffect(() => {
+    switch (Pantalla) {
+      case 0:
+        setTitle('VAMOS A CONFIGURAR sus Habilidades, Metas y Herramientas :)');
+        console.log(GlobalData);
+        setLista([]);
+        break;
+      case 1:
+        setTitle('Seleccione sus Habilidades para futuros Desarrollos');
+        setLista(GlobalData.SkillAPP);
+        break;
+
+      case 2:
+        setTitle('?En que Areas Desea Trabajar?');
+        setLista(GlobalData.AreasAPP);
+        break;
+      case 3:
+        setTitle('?Que Plataformas Usara para Completar sus Proyectos?');
+        setLista(GlobalData.PlatformAPP);
+        break;
+    }
+  }, [Pantalla]);
+
   return (
     <>
       <StatusBarv2 />
       <SafeAreav2>
-        {(() => {
-          switch (Pantalla) {
-            case 0:
-              return <HolaMundo NextPage={NextPage} BackPage={BackPage} />;
-            case 1:
-              return (
-                <PantallaHabilidades ObjGlobal={ObjGlobal.SkillAPP} NextPage={NextPage} BackPage={BackPage} />
-              );
-            case 2:
-              return <PantallaAreas ObjGlobal={ObjGlobal.AreasAPP} NextPage={NextPage} BackPage={BackPage} />;
-            case 3:
-              return (
-                <PantallaPlataformas ObjGlobal={ObjGlobal.PlatformAPP} NextPage={NextPage} BackPage={BackPage} />
-              );
-            default:
-              return <HolaMundo NextPage={NextPage} BackPage={BackPage} />;
-          }
-        })()}
+        <ViewSmall>
+          <Text
+            style={{
+              textAlign: 'center',
+            }}>
+            {Title}
+          </Text>
+        </ViewSmall>
+        <PantalladBASE
+          Lista={Lista}
+          Title={Title}
+          actualizarLista={actualizarLista}
+        />
         <ViewSmall>
           <MenuFast NextPage={NextPage} BackPage={BackPage} />
         </ViewSmall>
@@ -68,128 +102,99 @@ const UserConfig = (props) => {
 };
 export default UserConfig;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  button: {
+    alignItems: 'center',
+  },
+  countContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
+});
 
-const HolaMundo = ({NextPage, BackPage}) => {
-  return (
-    <>
-      <ViewSmall>
-        <Text
-          style={{
-            justifyContent: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-          }}>
-          BievenidoS
-        </Text>
-      </ViewSmall>
-      <ViewCFG>
-        <Text>Configuracion para seleccionar</Text>
-        <Text>sus</Text>
-        <Text>Habilidades,Metas,Herrmientas</Text>
-      </ViewCFG>
-    </>
-  );
-};
+const PantalladBASE = (props) => {
+  const {Title} = props;
+  const {Lista} = props;
+  const {actualizarLista} = props;
 
-const PantallaHabilidades = (props) => {
-  console.log(props);
+  // const Saludo = () => {
+  //   console.log('hola');
+  // };
   return (
-    <>
-      <ViewSmall>
-        <Text
-          style={{
-            justifyContent: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-          }}>
-          Habilidadeses
-        </Text>
-      </ViewSmall>
+    <ViewCFG>
+      <Pressable>
+        <FlatList
+          data={Lista}
+          renderItem={({item}) => (
+            <TouchableOpacity style={styles.button}>
+              <Text
+                style={{
+                  flex: 1,
+                  borderColor: '#f8f8ff',
+                  borderBottomWidth: 1,
+                  borderTopWidth: 1,
+                  height: 200,
+                  width: Dimensions.get('screen').width - 50,
+                  textAlignVertical: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  color: '#f8f8ff',
+                  fontWeight: 'bold',
+                  fontSize: 31,
+                }}>
+                {item}
+              </Text>
+            </TouchableOpacity>
 
-      <ViewCFG>
-        <Pressable style={{backgroundColor: 'white'}}>
-          <Text>Listado de Habilidades</Text>
-        </Pressable>
-      </ViewCFG>
-    </>
-  );
-};
-
-const PantallaAreas = (props) => {
-  console.log(props);
-  return (
-    <>
-      <ViewSmall>
-        <Text
-          style={{
-            justifyContent: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-          }}>
-          Areas
-        </Text>
-      </ViewSmall>
-      <ViewCFG>
-        <Pressable style={{backgroundColor: 'white'}}>
-          <Text>Listado de AREAS</Text>
-        </Pressable>
-      </ViewCFG>
-    </>
-  );
-};
-const PantallaPlataformas = (props) => {
-  console.log(props);
-  return (
-    <>
-      <ViewSmall>
-        <Text
-          style={{
-            justifyContent: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-          }}>
-          Plataformas
-        </Text>
-      </ViewSmall>
-      <ViewCFG>
-        <Pressable style={{backgroundColor: 'white'}}>
-          <Text>Listado de Plataformas</Text>
-        </Pressable>
-      </ViewCFG>
-    </>
+            // <TouchableOpacity
+            //   style={{
+            //     alignItems: 'center',
+            //     backgroundColor: '#DDDDDD',
+            //     padding: 10,
+            //   }}>
+            //   <Text
+            //     style={{
+            //       flex: 1,
+            //       borderColor: '#f8f8ff',
+            //       borderBottomWidth: 1,
+            //       borderTopWidth: 1,
+            //       height: 200,
+            //       width: Dimensions.get('screen').width - 50,
+            //       textAlignVertical: 'center',
+            //       justifyContent: 'center',
+            //       textAlign: 'center',
+            //       color: '#f8f8ff',
+            //       fontWeight: 'bold',
+            //       fontSize: 31,
+            //     }}
+            //     onPress={() => {
+            //       actualizarLista();
+            //     }}
+            //     key={item}>
+            //     {item}
+            //   </Text>
+            // </TouchableOpacity>
+          )}
+        />
+      </Pressable>
+    </ViewCFG>
   );
 };
 
 const MenuFast = ({NextPage, BackPage}) => {
   return (
-    <View style={{flexDirection: 'row'}}>
-      <Pressable
-        onPress={BackPage}
-        style={{
-          flex: 1,
-          backgroundColor: 'red',
-          padding: 20,
-          borderRadius: 20,
-          marginTop: 20,
-        }}>
-        <View>
-          <Text>Atras</Text>
-        </View>
-      </Pressable>
-      <Pressable
-        onPress={NextPage}
-        style={{
-          flex: 1,
-          backgroundColor: 'red',
-          padding: 20,
-          borderRadius: 20,
-          marginTop: 20,
-        }}>
-        <View>
-          <Text>Siguiente</Text>
-        </View>
-      </Pressable>
-    </View>
+    <Area2BtnInSmallView>
+      <BtnAppPrimary fnBtn={BackPage}>
+        <Text>Atras</Text>
+      </BtnAppPrimary>
+      <BtnAppPrimary fnBtn={NextPage}>
+        <Text>Atras</Text>
+      </BtnAppPrimary>
+    </Area2BtnInSmallView>
   );
 };
