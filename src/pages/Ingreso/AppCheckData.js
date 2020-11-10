@@ -31,7 +31,11 @@ export default function AppCheckData(props) {
     //revisa configuracion Entorno del Usuario
     if (ObjUSR == undefined) {
       console.log('vamos a llenarlo todo');
-
+      console.log('vamos a llenarlo todo');
+      console.log('vamos a llenarlo todo');
+      console.log('vamos a llenarlo todo');
+      console.log('vamos a llenarlo todo');
+      console.log('vamos a llenarlo todo');
       setConfigState(false);
     } else {
       console.log('hay algo que llenar?');
@@ -44,6 +48,12 @@ export default function AppCheckData(props) {
 
         setConfigState(false);
       } else {
+        console.log('todos estan llenitos');
+        console.log('todos estan llenitos');
+        console.log('todos estan llenitos');
+        console.log('todos estan llenitos');
+        console.log('todos estan llenitos');
+        console.log('todos estan llenitos');
         console.log('todos estan llenitos');
         setConfigState(true);
       }
@@ -59,7 +69,7 @@ export default function AppCheckData(props) {
     <Text>vamos a la aplicaicon</Text>
   ) : (
     // <UserConfig />;
-    <ConfigStart GlobalData={GlobalData} />
+    <ConfigStart GlobalData={GlobalData} ObjUSR={ObjUSR} />
   );
 }
 

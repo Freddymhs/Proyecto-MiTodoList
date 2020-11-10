@@ -6,9 +6,9 @@ import UserConfig from '../configs/UserConfig';
 // const animalitos = ['a', 'c', 'z'];
 const ConfigsStart = (props) => {
   const {GlobalData} = props;
-
+  const {ObjUSR} = props;
   console.log('#################CONFIG START################');
-  return <UserConfig GlobalData={GlobalData} />;
+  return <UserConfig GlobalData={GlobalData} ObjUSR={ObjUSR} />;
 
   // return (
   //   <>

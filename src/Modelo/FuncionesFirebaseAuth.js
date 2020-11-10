@@ -94,6 +94,12 @@ export const CreandoUsuarioFB = (user) => {
     .ref('usuarios/' + user.uid)
     .set(user);
 };
+export const ActualizandoDatos = (user) => {
+  firebase
+    .database()
+    .ref('usuarios/' + user.uid)
+    .set(user);
+};
 
 // creamos usuario en BD con su UID
 export const AgregandoSettingEntorno = (user) => {

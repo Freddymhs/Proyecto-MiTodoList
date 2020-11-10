@@ -70,8 +70,13 @@ luego debe agregar esto y subirlo para asignarlo a un usuario
 se capturas las opciones seleccionadas para establecer un nuevo perfil 
 se muestran las opciones seleccionadas para el usuario final (conocimientos,plataforma,areas de aprendizaje)
 
+10/11/2020
+algunas dudas de hoy ? 
+Como pasar contenido pasar de un componente a otro aqui no existe el path o url.... 
+debi usar reacnative native navigator y no solo componentes ... 
 
-
+uso ya que no use react navigator :/
+yarn add react-native-restart
 <!-- ///////////creacion de proyectos
 
 

@@ -90,6 +90,7 @@ export default function App() {
         <>
           <AppCheckData
             ObjUSR={ObjUSR}
+
             // GlobalData={GlobalData}
 
             // setConfigState={setConfigState}

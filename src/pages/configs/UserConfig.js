@@ -22,15 +22,44 @@ import SafeAreav2, {
   Area2BtnInSmallView,
 } from '../../ComponenteGlobales/SeccionMaquetacion';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
+import {ActualizandoDatos} from '../../Modelo/FuncionesFirebaseAuth';
 
 ///////////////////////////////////////////////////////////PARTE1
 // movimiento en la presentacion
 const UserConfig = (props) => {
   const {GlobalData} = props;
   const [Pantalla, setPantalla] = useState(0);
+  const {ObjUSR} = props;
   const NextPage = () => {
     if (Pantalla < 4) {
+      console.log('hola');
       return setPantalla(Pantalla + 1);
+    }
+    if (Pantalla == 4) {
+      console.log('estamos listos?');
+      if (
+        NuevoPerfil.AreaUSR != '' &&
+        NuevoPerfil.PlatformUSR != '' &&
+        NuevoPerfil.SkillUSR != ''
+      ) {
+        //  aqui actualizar el dato y subirlo a firebase
+
+        // aqui cargar el estado del usuario para mandarlo a la aplicaicon
+        // ACTUALIZNADO DATOS DLE USUARIO
+        // ActualizandoDatos(NuevoPerfil);
+
+        // console.log(NuevoPerfil);
+        // pasarle todos los datos al NUEVO PERFIL y subirlo
+        setNuevoPerfil((prev) => ({
+          ...prev,
+          uid: ObjUSR.uid,
+          email: ObjUSR.email,
+        }));
+
+        ActualizandoDatos(NuevoPerfil);
+
+        Alert.alert('gogogo');
+      }
     }
   };
   const BackPage = () => {
@@ -45,16 +74,28 @@ const UserConfig = (props) => {
     PlatformUSR: [],
     SkillUSR: [],
   });
+  ////////////////////Borrar Listas?
+  const DelSkills = () => {
+    setNuevoPerfil((prevState) => ({
+      ...prevState,
+      SkillUSR: [],
+    }));
+  };
+  const DelAreas = () => {
+    setNuevoPerfil((prevState) => ({
+      ...prevState,
+      AreaUSR: [],
+    }));
+  };
+  const DelPlatform = () => {
+    setNuevoPerfil((prevState) => ({
+      ...prevState,
+      PlatformUSR: [],
+    }));
+  };
   ////////////////////////////////actualizar lista de nuevo perfil
   const actualizarLista = (e) => {
     const item = e.item;
-    // Pantalla // la posicion de la pantalla
-    // state de sus datos
-    // const Actualizar
-
-    // revisa que el item no exista en el array de la PANTALLA indicada
-    // if(item =  )
-
     if (Pantalla == 1) {
       console.log('actulizando la 1');
 
@@ -147,6 +188,10 @@ const UserConfig = (props) => {
           actualizarLista={actualizarLista}
           Pantalla={Pantalla}
           NuevoPerfil={NuevoPerfil}
+          DelSkills={DelSkills}
+          DelAreas={DelAreas}
+          DelPlatform={DelPlatform}
+
           // NuevoPerfil={Pantalla == 4 ? NuevoPerfil : ''}
         />
         <ViewSmall>
@@ -179,6 +224,11 @@ const PantalladBASE = (props) => {
   const {actualizarLista} = props;
   const {Pantalla} = props;
   const {NuevoPerfil} = props;
+
+  const {DelSkills} = props;
+  const {DelAreas} = props;
+  const {DelPlatform} = props;
+
   // const {NuevoPerfil} = props;
 
   return (
@@ -216,24 +266,33 @@ const PantalladBASE = (props) => {
           />
         ) : (
           <>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text
-                style={{
-                  color: '#f8f8ff',
-                  fontWeight: 'bold',
-                }}>
-                Sus Habilidades
-              </Text>
-              <Text
-                style={{
-                  color: '#f8f8ff',
-                  fontWeight: 'bold',
-                  backgroundColor: 'red',
-                }}>
-                Borrar Seleccion?
-              </Text>
-            </View>
+            {NuevoPerfil.SkillUSR != '' ? (
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text
+                  style={{
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                  }}>
+                  Sus Habilidades
+                </Text>
+                <Text
+                  // DelSkills
+                  // DelAreas
+                  // DelPlatform
+
+                  onPress={() => DelSkills()}
+                  style={{
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                    backgroundColor: 'red',
+                  }}>
+                  Borrar Seleccion?
+                </Text>
+              </View>
+            ) : (
+              <Text> Necesita almenos 1 Plataforma para Continuar</Text>
+            )}
             <FlatList
               data={NuevoPerfil.SkillUSR}
               horizontal={true}
@@ -265,7 +324,31 @@ const PantalladBASE = (props) => {
               )}
             />
 
-            <Text>Sus Areas</Text>
+            {NuevoPerfil.AreaUSR != '' ? (
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text
+                  style={{
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                  }}>
+                  Sus Areas
+                </Text>
+                <Text
+                  DelPlatform
+                  onPress={() => DelAreas()}
+                  style={{
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                    backgroundColor: 'red',
+                  }}>
+                  Borrar Seleccion?
+                </Text>
+              </View>
+            ) : (
+              <Text>Necesita almenos 1 Area para Continuar</Text>
+            )}
+
             <FlatList
               data={NuevoPerfil.AreaUSR}
               horizontal={true}
@@ -296,7 +379,32 @@ const PantalladBASE = (props) => {
                 </TouchableOpacity>
               )}
             />
-            <Text>Sus Plataforma</Text>
+
+            {NuevoPerfil.PlatformUSR != '' ? (
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text
+                  style={{
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                  }}>
+                  Sus Plataformas
+                </Text>
+                <Text
+                  DelPlatform
+                  onPress={() => DelPlatform()}
+                  style={{
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                    backgroundColor: 'red',
+                  }}>
+                  Borrar Seleccion?
+                </Text>
+              </View>
+            ) : (
+              <Text>Necesita almenos 1 Plataforma para Continuar</Text>
+            )}
+
             <FlatList
               data={NuevoPerfil.PlatformUSR}
               horizontal={true}
