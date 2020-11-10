@@ -65,6 +65,13 @@ leer su BD y si no tiene configuracion asignarlas en otra pantalla de 'USERCONFI
 agregado contenido grafico , de funcion , reuso de componentes para mostrar las opciones al usuario,
 luego debe agregar esto y subirlo para asignarlo a un usuario
 
+
+09/11/2020
+se capturas las opciones seleccionadas para establecer un nuevo perfil 
+se muestran las opciones seleccionadas para el usuario final (conocimientos,plataforma,areas de aprendizaje)
+
+
+
 <!-- ///////////creacion de proyectos
 
 

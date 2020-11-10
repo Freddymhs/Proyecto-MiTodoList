@@ -10,6 +10,7 @@ import {
   Dimensions,
   TouchableHighlight,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import SafeAreav2, {
   ScrollViewv2,
@@ -22,22 +23,13 @@ import SafeAreav2, {
 } from '../../ComponenteGlobales/SeccionMaquetacion';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 
-// export default function UserConfig() {
-
-// const BackPage = () => {
-//   console.log('avanzar');
-// };
-
-// state de el para agregarle sus datos
-// state de sus datos
-// const Actualizar
-
+///////////////////////////////////////////////////////////PARTE1
+// movimiento en la presentacion
 const UserConfig = (props) => {
   const {GlobalData} = props;
-
   const [Pantalla, setPantalla] = useState(0);
   const NextPage = () => {
-    if (Pantalla < 3) {
+    if (Pantalla < 4) {
       return setPantalla(Pantalla + 1);
     }
   };
@@ -47,18 +39,73 @@ const UserConfig = (props) => {
     }
   };
 
+  // state para el usuario nuevo y su nuevo perfil
+  const [NuevoPerfil, setNuevoPerfil] = useState({
+    AreaUSR: [],
+    PlatformUSR: [],
+    SkillUSR: [],
+  });
+  ////////////////////////////////actualizar lista de nuevo perfil
+  const actualizarLista = (e) => {
+    const item = e.item;
+    // Pantalla // la posicion de la pantalla
+    // state de sus datos
+    // const Actualizar
+
+    // revisa que el item no exista en el array de la PANTALLA indicada
+    // if(item =  )
+
+    if (Pantalla == 1) {
+      console.log('actulizando la 1');
+
+      if (NuevoPerfil.SkillUSR.indexOf(item) > -1) {
+        Alert.alert('Habildiad ya fue agregada');
+      } else {
+        const prevNestedPosition = NuevoPerfil.SkillUSR;
+        setNuevoPerfil((prevState) => ({
+          ...prevState,
+          SkillUSR: [...prevNestedPosition, item],
+        }));
+      }
+      console.log(NuevoPerfil);
+    }
+    if (Pantalla == 2) {
+      console.log('actulizando la 2');
+      if (NuevoPerfil.AreaUSR.indexOf(item) > -1) {
+        Alert.alert('Area ya fue agregada');
+      } else {
+        const prevNestedPosition = NuevoPerfil.AreaUSR;
+        setNuevoPerfil((prevState) => ({
+          ...prevState,
+          AreaUSR: [...prevNestedPosition, item],
+        }));
+      }
+    }
+    if (Pantalla == 3) {
+      console.log('actulizando la 3');
+
+      if (NuevoPerfil.PlatformUSR.indexOf(item) > -1) {
+        Alert.alert('Plataforma ya fue seleccionada');
+      } else {
+        const prevNestedPosition = NuevoPerfil.PlatformUSR;
+        setNuevoPerfil((prevState) => ({
+          ...prevState,
+          PlatformUSR: [...prevNestedPosition, item],
+        }));
+      }
+    }
+  };
+
   // atributos de cada pantalla
   const [Title, setTitle] = useState('default');
   const [Lista, setLista] = useState([]);
-  const actualizarLista = () => {
-    console.log('actulizando la listaaaaaaaaaaaaaaaaaaaaaaaaaa');
-  };
+
   useEffect(() => {
     switch (Pantalla) {
       case 0:
         setTitle('VAMOS A CONFIGURAR sus Habilidades, Metas y Herramientas :)');
         console.log(GlobalData);
-        setLista([]);
+        // setLista([]);
         break;
       case 1:
         setTitle('Seleccione sus Habilidades para futuros Desarrollos');
@@ -72,6 +119,12 @@ const UserConfig = (props) => {
       case 3:
         setTitle('?Que Plataformas Usara para Completar sus Proyectos?');
         setLista(GlobalData.PlatformAPP);
+        break;
+      case 4:
+        setTitle('?Estos son sus datos finales?');
+        setLista(GlobalData);
+        // console.log('estos tiene el usuario');
+        // console.log(NuevoPerfil);
         break;
     }
   }, [Pantalla]);
@@ -92,6 +145,9 @@ const UserConfig = (props) => {
           Lista={Lista}
           Title={Title}
           actualizarLista={actualizarLista}
+          Pantalla={Pantalla}
+          NuevoPerfil={NuevoPerfil}
+          // NuevoPerfil={Pantalla == 4 ? NuevoPerfil : ''}
         />
         <ViewSmall>
           <MenuFast NextPage={NextPage} BackPage={BackPage} />
@@ -121,66 +177,158 @@ const PantalladBASE = (props) => {
   const {Title} = props;
   const {Lista} = props;
   const {actualizarLista} = props;
+  const {Pantalla} = props;
+  const {NuevoPerfil} = props;
+  // const {NuevoPerfil} = props;
 
-  // const Saludo = () => {
-  //   console.log('hola');
-  // };
   return (
     <ViewCFG>
       <Pressable>
-        <FlatList
-          data={Lista}
-          renderItem={({item}) => (
-            <TouchableOpacity style={styles.button}>
+        {Pantalla != 4 ? (
+          <FlatList
+            data={Lista}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                style={styles.button}
+                // activeOpacity={0}
+                onPress={() => {
+                  actualizarLista({item});
+                }}>
+                <Text
+                  style={{
+                    flex: 1,
+                    borderColor: '#f8f8ff',
+                    borderBottomWidth: 1,
+                    borderTopWidth: 1,
+                    height: 200,
+                    width: Dimensions.get('screen').width - 50,
+                    textAlignVertical: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    color: '#f8f8ff',
+                    fontWeight: 'bold',
+                    fontSize: 31,
+                  }}>
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+        ) : (
+          <>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Text
                 style={{
-                  flex: 1,
-                  borderColor: '#f8f8ff',
-                  borderBottomWidth: 1,
-                  borderTopWidth: 1,
-                  height: 200,
-                  width: Dimensions.get('screen').width - 50,
-                  textAlignVertical: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
                   color: '#f8f8ff',
                   fontWeight: 'bold',
-                  fontSize: 31,
                 }}>
-                {item}
+                Sus Habilidades
               </Text>
-            </TouchableOpacity>
+              <Text
+                style={{
+                  color: '#f8f8ff',
+                  fontWeight: 'bold',
+                  backgroundColor: 'red',
+                }}>
+                Borrar Seleccion?
+              </Text>
+            </View>
+            <FlatList
+              data={NuevoPerfil.SkillUSR}
+              horizontal={true}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  style={styles.button}
+                  // activeOpacity={0}
+                  onPress={() => {
+                    console.log('enviarlo?');
+                  }}>
+                  <Text
+                    style={{
+                      flex: 1,
+                      borderColor: '#f8f8ff',
+                      borderBottomWidth: 1,
+                      borderTopWidth: 1,
+                      height: 200,
+                      width: Dimensions.get('screen').width - 50,
+                      textAlignVertical: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      color: '#f8f8ff',
+                      fontWeight: 'bold',
+                      fontSize: 31,
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
 
-            // <TouchableOpacity
-            //   style={{
-            //     alignItems: 'center',
-            //     backgroundColor: '#DDDDDD',
-            //     padding: 10,
-            //   }}>
-            //   <Text
-            //     style={{
-            //       flex: 1,
-            //       borderColor: '#f8f8ff',
-            //       borderBottomWidth: 1,
-            //       borderTopWidth: 1,
-            //       height: 200,
-            //       width: Dimensions.get('screen').width - 50,
-            //       textAlignVertical: 'center',
-            //       justifyContent: 'center',
-            //       textAlign: 'center',
-            //       color: '#f8f8ff',
-            //       fontWeight: 'bold',
-            //       fontSize: 31,
-            //     }}
-            //     onPress={() => {
-            //       actualizarLista();
-            //     }}
-            //     key={item}>
-            //     {item}
-            //   </Text>
-            // </TouchableOpacity>
-          )}
-        />
+            <Text>Sus Areas</Text>
+            <FlatList
+              data={NuevoPerfil.AreaUSR}
+              horizontal={true}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  style={styles.button}
+                  // activeOpacity={0}
+                  onPress={() => {
+                    console.log('enviarlo?');
+                  }}>
+                  <Text
+                    style={{
+                      flex: 1,
+                      borderColor: '#f8f8ff',
+                      borderBottomWidth: 1,
+                      borderTopWidth: 1,
+                      height: 200,
+                      width: Dimensions.get('screen').width - 50,
+                      textAlignVertical: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      color: '#f8f8ff',
+                      fontWeight: 'bold',
+                      fontSize: 31,
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+            <Text>Sus Plataforma</Text>
+            <FlatList
+              data={NuevoPerfil.PlatformUSR}
+              horizontal={true}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  style={styles.button}
+                  // activeOpacity={0}
+                  onPress={() => {
+                    console.log('enviarlo?');
+                  }}>
+                  <Text
+                    style={{
+                      flex: 1,
+                      borderColor: '#f8f8ff',
+                      borderBottomWidth: 1,
+                      borderTopWidth: 1,
+                      height: 200,
+                      width: Dimensions.get('screen').width - 50,
+                      textAlignVertical: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      color: '#f8f8ff',
+                      fontWeight: 'bold',
+                      fontSize: 31,
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            />
+          </>
+        )}
       </Pressable>
     </ViewCFG>
   );
@@ -193,7 +341,7 @@ const MenuFast = ({NextPage, BackPage}) => {
         <Text>Atras</Text>
       </BtnAppPrimary>
       <BtnAppPrimary fnBtn={NextPage}>
-        <Text>Atras</Text>
+        <Text>Siguiente</Text>
       </BtnAppPrimary>
     </Area2BtnInSmallView>
   );

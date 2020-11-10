@@ -7,10 +7,6 @@ import UserConfig from '../configs/UserConfig';
 const ConfigsStart = (props) => {
   const {GlobalData} = props;
 
-
-  
-
-
   console.log('#################CONFIG START################');
   return <UserConfig GlobalData={GlobalData} />;
 

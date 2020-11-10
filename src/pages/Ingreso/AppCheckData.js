@@ -27,8 +27,6 @@ export default function AppCheckData(props) {
     TraerDatosFBConfig(setGlobalData);
 
     //traer los datos de esta persona ya logeada
-    
-
 
     //revisa configuracion Entorno del Usuario
     if (ObjUSR == undefined) {
