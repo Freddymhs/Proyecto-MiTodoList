@@ -44,9 +44,7 @@ export default function App() {
       if (!response) {
         console.log('aun no ah cambiado echo nadaa');
       } else {
-        console.log('---------------------------------------------');
-        setObjUSR({uid: response.uid, email: response.email});
-
+        // //guardamos su ID
         setUsrSession(response.uid);
 
         // TRAEMOS sus datos de la BD
@@ -73,7 +71,6 @@ export default function App() {
   };
 
   // console.log(ObjUSR);
-  console.log(ObjUSR);
   console.log('##################APP####################');
   return (
     <>
@@ -91,18 +88,13 @@ export default function App() {
         />
       ) : (
         <>
-          {/* buscando donde esta el error */}
-          {console.log(
-            'ver objUSR ver objUSR ver objUSR ver objUSR ver objUSR ',
-          )}
           {console.log(ObjUSR)}
-          {/* <AppCheckData
+          <AppCheckData
             ObjUSR={ObjUSR}
+            // GlobalData={GlobalData}
 
-           // // GlobalData={GlobalData}
-
-          // // setConfigState={setConfigState}
-          /> */}
+            // setConfigState={setConfigState}
+          />
         </>
       )}
 

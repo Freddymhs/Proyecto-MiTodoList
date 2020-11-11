@@ -23,8 +23,7 @@ import SafeAreav2, {
 } from '../../ComponenteGlobales/SeccionMaquetacion';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 import {ActualizandoDatos} from '../../Modelo/FuncionesFirebaseAuth';
-// import CodePush from 'react-native-code-push';
-import RNRestart from 'react-native-restart'; // Import package from node modules
+
 ///////////////////////////////////////////////////////////PARTE1
 // movimiento en la presentacion
 const UserConfig = (props) => {
@@ -43,8 +42,23 @@ const UserConfig = (props) => {
         NuevoPerfil.PlatformUSR != '' &&
         NuevoPerfil.SkillUSR != ''
       ) {
-        ActualizandoDatos(NuevoPerfil);
-        RNRestart.Restart();
+        console.log('DATOS GLOBALES');
+        console.log(GlobalData);
+        console.log('NUEVO PERFIL ES ');
+        console.log(NuevoPerfil);
+        console.log('EL OBJETO USUARIO ES ');
+        console.log(ObjUSR);
+        ///////////////////////////para que funcione solo descomentar lo de abajo
+
+        // ActualizandoDatos(NuevoPerfil);
+        // setNuevoPerfil((prev) => ({
+        //   ...prev,
+        //   uid: ObjUSR.uid,
+        //   email: ObjUSR.email,
+        // }));
+        // ActualizandoDatos(NuevoPerfil);
+        // CodePush.restartApp();
+        // Alert.alert('gogogo');
       }
     }
   };
@@ -154,12 +168,6 @@ const UserConfig = (props) => {
         // console.log(NuevoPerfil);
         break;
     }
-
-    setNuevoPerfil((prev) => ({
-      ...prev,
-      uid: ObjUSR.uid,
-      email: ObjUSR.email,
-    }));
   }, [Pantalla]);
 
   return (
