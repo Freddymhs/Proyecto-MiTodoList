@@ -99,6 +99,8 @@ export const ActualizandoDatos = (user) => {
     .database()
     .ref('usuarios/' + user.uid)
     .set(user);
+
+  // Alert.alert(user.uid);
 };
 
 // creamos usuario en BD con su UID

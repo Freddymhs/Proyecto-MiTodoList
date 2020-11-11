@@ -8,8 +8,10 @@ const ConfigsStart = (props) => {
   const {GlobalData} = props;
   const {ObjUSR} = props;
   console.log('#################CONFIG START################');
+  console.log(GlobalData);
+  console.log(ObjUSR);
+  return <Text>config start</Text>;
   return <UserConfig GlobalData={GlobalData} ObjUSR={ObjUSR} />;
-
   // return (
   //   <>
 

@@ -23,7 +23,8 @@ import SafeAreav2, {
 } from '../../ComponenteGlobales/SeccionMaquetacion';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 import {ActualizandoDatos} from '../../Modelo/FuncionesFirebaseAuth';
-
+// import CodePush from 'react-native-code-push';
+import RNRestart from 'react-native-restart'; // Import package from node modules
 ///////////////////////////////////////////////////////////PARTE1
 // movimiento en la presentacion
 const UserConfig = (props) => {
@@ -42,23 +43,8 @@ const UserConfig = (props) => {
         NuevoPerfil.PlatformUSR != '' &&
         NuevoPerfil.SkillUSR != ''
       ) {
-        //  aqui actualizar el dato y subirlo a firebase
-
-        // aqui cargar el estado del usuario para mandarlo a la aplicaicon
-        // ACTUALIZNADO DATOS DLE USUARIO
-        // ActualizandoDatos(NuevoPerfil);
-
-        // console.log(NuevoPerfil);
-        // pasarle todos los datos al NUEVO PERFIL y subirlo
-        setNuevoPerfil((prev) => ({
-          ...prev,
-          uid: ObjUSR.uid,
-          email: ObjUSR.email,
-        }));
-
         ActualizandoDatos(NuevoPerfil);
-
-        Alert.alert('gogogo');
+        RNRestart.Restart();
       }
     }
   };
@@ -168,6 +154,12 @@ const UserConfig = (props) => {
         // console.log(NuevoPerfil);
         break;
     }
+
+    setNuevoPerfil((prev) => ({
+      ...prev,
+      uid: ObjUSR.uid,
+      email: ObjUSR.email,
+    }));
   }, [Pantalla]);
 
   return (

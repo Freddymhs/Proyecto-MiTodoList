@@ -37,14 +37,16 @@ export default function App() {
   //////////////////session para swap screens
   const [UsrSession, setUsrSession] = useState(null);
 
-  // firebase.auth().signOut();
+  firebase.auth().signOut();
   useEffect(() => {
     ////usuariio esta registraod en AUTH?
     firebase.auth().onAuthStateChanged(function (response) {
       if (!response) {
         console.log('aun no ah cambiado echo nadaa');
       } else {
-        // //guardamos su ID
+        console.log('---------------------------------------------');
+        setObjUSR({uid: response.uid, email: response.email});
+
         setUsrSession(response.uid);
 
         // TRAEMOS sus datos de la BD
@@ -71,6 +73,7 @@ export default function App() {
   };
 
   // console.log(ObjUSR);
+  console.log(ObjUSR);
   console.log('##################APP####################');
   return (
     <>
@@ -88,13 +91,18 @@ export default function App() {
         />
       ) : (
         <>
-          <AppCheckData
+          {/* buscando donde esta el error */}
+          {console.log(
+            'ver objUSR ver objUSR ver objUSR ver objUSR ver objUSR ',
+          )}
+          {console.log(ObjUSR)}
+          {/* <AppCheckData
             ObjUSR={ObjUSR}
 
-            // GlobalData={GlobalData}
+           // // GlobalData={GlobalData}
 
-            // setConfigState={setConfigState}
-          />
+          // // setConfigState={setConfigState}
+          /> */}
         </>
       )}
 

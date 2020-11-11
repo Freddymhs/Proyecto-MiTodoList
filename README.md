@@ -75,8 +75,11 @@ algunas dudas de hoy ?
 Como pasar contenido pasar de un componente a otro aqui no existe el path o url.... 
 debi usar reacnative native navigator y no solo componentes ... 
 
-uso ya que no use react navigator :/
-yarn add react-native-restart
+uso  yarn add react-native-restart,  ya que no use react navigator :/
+se registrar nuevos usuarios , se puede ingresar
+ya se actualizan y se crea el perfil del usuario 
+
+
 <!-- ///////////creacion de proyectos
 
 

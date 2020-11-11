@@ -4,7 +4,7 @@
 export default class ClsUsuario {
   uid;
   email;
-  AreaUSR = ['a1','a2','a3'];
+  AreaUSR = [];
   PlatformUSR = [];
   SkillUSR = [];
 

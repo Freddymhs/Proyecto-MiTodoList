@@ -31,11 +31,6 @@ export default function AppCheckData(props) {
     //revisa configuracion Entorno del Usuario
     if (ObjUSR == undefined) {
       console.log('vamos a llenarlo todo');
-      console.log('vamos a llenarlo todo');
-      console.log('vamos a llenarlo todo');
-      console.log('vamos a llenarlo todo');
-      console.log('vamos a llenarlo todo');
-      console.log('vamos a llenarlo todo');
       setConfigState(false);
     } else {
       console.log('hay algo que llenar?');
@@ -49,20 +44,12 @@ export default function AppCheckData(props) {
         setConfigState(false);
       } else {
         console.log('todos estan llenitos');
-        console.log('todos estan llenitos');
-        console.log('todos estan llenitos');
-        console.log('todos estan llenitos');
-        console.log('todos estan llenitos');
-        console.log('todos estan llenitos');
-        console.log('todos estan llenitos');
         setConfigState(true);
       }
     }
   }, [ObjUSR]);
 
-  // TodoList.AreasAPP = GlobalData.AreasAPP;
-  // TodoList.PlatformAPP = GlobalData.PlatformAPP;
-  // TodoList.SkillAPP = GlobalData.SkillAPP;
+  console.log(ObjUSR);
 
   console.log('#################CHECKDATA################');
   return ConfigState ? (
