@@ -24,6 +24,9 @@ import SafeAreav2, {
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
 import {ActualizandoDatos} from '../../Modelo/FuncionesFirebaseAuth';
 
+import RNRestart from 'react-native-restart';
+
+
 ///////////////////////////////////////////////////////////PARTE1
 // movimiento en la presentacion
 const UserConfig = (props) => {
@@ -42,23 +45,15 @@ const UserConfig = (props) => {
         NuevoPerfil.PlatformUSR != '' &&
         NuevoPerfil.SkillUSR != ''
       ) {
-        console.log('DATOS GLOBALES');
-        console.log(GlobalData);
-        console.log('NUEVO PERFIL ES ');
-        console.log(NuevoPerfil);
-        console.log('EL OBJETO USUARIO ES ');
-        console.log(ObjUSR);
+        setNuevoPerfil((prev) => ({
+          ...prev,
+          uid: ObjUSR.uid,
+          email: ObjUSR.email,
+        }));
         ///////////////////////////para que funcione solo descomentar lo de abajo
-
-        // ActualizandoDatos(NuevoPerfil);
-        // setNuevoPerfil((prev) => ({
-        //   ...prev,
-        //   uid: ObjUSR.uid,
-        //   email: ObjUSR.email,
-        // }));
-        // ActualizandoDatos(NuevoPerfil);
-        // CodePush.restartApp();
-        // Alert.alert('gogogo');
+        ActualizandoDatos(NuevoPerfil);
+        RNRestart.Restart();
+        // https://www.npmjs.com/package/react-native-restart
       }
     }
   };
@@ -142,6 +137,18 @@ const UserConfig = (props) => {
   const [Lista, setLista] = useState([]);
 
   useEffect(() => {
+    if (ObjUSR == undefined) {
+      console.log('PRIMERA VEZ');
+    } else {
+      // /    console.log(ObjUSR);
+      // console.log(ObjUSR);
+      setNuevoPerfil((prev) => ({
+        ...prev,
+        uid: ObjUSR.uid,
+        email: ObjUSR.email,
+      }));
+    }
+
     switch (Pantalla) {
       case 0:
         setTitle('VAMOS A CONFIGURAR sus Habilidades, Metas y Herramientas :)');

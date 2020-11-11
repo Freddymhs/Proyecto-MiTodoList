@@ -28,16 +28,14 @@ import {
   CreandoUsuarioFB,
 } from './src/Modelo/FuncionesFirebaseAuth';
 import ClsUsuario from './src/Modelo/ClsUsuario';
-
+firebase.auth().signOut();
 export default function App() {
   //////////////ALMACENAR DATOS DEL USUARIO
-  const usuario = new ClsUsuario();
   const [ObjUSR, setObjUSR] = useState();
 
   //////////////////session para swap screens
   const [UsrSession, setUsrSession] = useState(null);
 
-  firebase.auth().signOut();
   useEffect(() => {
     ////usuariio esta registraod en AUTH?
     firebase.auth().onAuthStateChanged(function (response) {
@@ -49,15 +47,40 @@ export default function App() {
 
         // TRAEMOS sus datos de la BD
         ExisteUIDenDB(response.uid, setObjUSR);
+
+        // debemos revisar que objeto usuario exista antes de insertar datos
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
+        console.log(ObjUSR);
       }
     });
-
-    //  esto se ejecuta siempre
-
-    // if (ObjUSR) {
-    //   console.log('sda');
-    //   // setConfigState(true)
-    // }
   }, []);
 
   ////FORMULARIO
