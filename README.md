@@ -2,30 +2,33 @@
 
 `Aplicacion Todolist para organizar ordenar los proyectos que debo realizar por prioridad (conocimientos que manejo o no ), area (web ,movil) , tecnologias(RN,gatsby,MERN) , y otras que ayudaran a mi cv como (Apis,test unitarios)`
 
-`se asume que trabajae con frameworks css o css puro `
-`se asume que siempre intentare trabajar con ATOMIC DESIGN en todas mis apps`
+#pre operaciones u operacion basicas
 
-////////////////////////////////////////////
+registrar usuarios
+registrar perfil usuario
 
-#operaciones del TODOLIST
+#operaciones del TODOLIST por usuario
 
-- podre ver proyectos
-- podre borrar proyectos
-- tendre tomar proyectos
+- crear proyectos
+- ver proyectos
+- borrar proyectos
+
+- tomar proyectos
 - podre terminar proyectos
 
-#pantalla obligatoria para el usuario
+#primera pantalla -user
 
-setting : x- selecciona tus conocimientos REALES demostrables y a mejorar.
-setting : 0- En que plataformas va a crear sus apps?
-setting : 1- CREA mis Areas de Interes
+welcome : ingresar o crear cuenta
+setting : x- define tu entorno (areas,habilidades,plataforma)
 
-#Creacion de Proyectos a trabajar.
-1- Agregar 'NOMBRE' Proyecto 'RELACIONADO a una PLATAFORMA'//con cual lo vas a hacer?
-2- Seleccionas 1 o 2 areas para este proyecto. // elige 3 areas maximo pls
-2- agregar PROYECTO realizonadas a mis areas de interes // este proyecto se apega a alguna de sus areas de interes?
+#Creacion de Proyectos a realizar.
+1- Asigna nombre proyecto
+1.1 descripcion
+2- Selecciona sobre que Plataforma vas a construir la aplicacion (MERN,GATSBY,REACTNATIVE)
+3- selecciona 3 Areas maximo relacionadas al mundo laboral de interes.
+4- elige las habilidades que Necesitas usar para este proyecto.
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 01/11/2020 Comienzo mi idea
 usando rnsf snippet :)
 
@@ -65,20 +68,18 @@ leer su BD y si no tiene configuracion asignarlas en otra pantalla de 'USERCONFI
 agregado contenido grafico , de funcion , reuso de componentes para mostrar las opciones al usuario,
 luego debe agregar esto y subirlo para asignarlo a un usuario
 
-
 09/11/2020
-se capturas las opciones seleccionadas para establecer un nuevo perfil 
+se capturas las opciones seleccionadas para establecer un nuevo perfil
 se muestran las opciones seleccionadas para el usuario final (conocimientos,plataforma,areas de aprendizaje)
 
 10/11/2020
-algunas dudas de hoy ? 
-Como pasar contenido pasar de un componente a otro aqui no existe el path o url.... 
-debi usar reacnative native navigator y no solo componentes ... 
+algunas dudas de hoy ?
+Como pasar contenido pasar de un componente a otro aqui no existe el path o url....
+debi usar reacnative native navigator y no solo componentes ...
 
-uso  yarn add react-native-restart,  ya que no use react navigator :/
+uso yarn add react-native-restart, ya que no use react navigator :/
 se registrar nuevos usuarios , se puede ingresar
-ya se actualizan y se crea el perfil del usuario 
-
+ya se actualizan y se crea el perfil del usuario
 
 <!-- ///////////creacion de proyectos
 
