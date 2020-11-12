@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 // mis componentes
 import PresentacionApp from './src/pages/PreIngreso/PresentacionAPP';
-import AppToDo from './src/pages/Ingreso/AppToDo';
 
 import firebase from './src/libs/Firebase';
 import {
@@ -19,7 +18,7 @@ import {
   setUsrValido,
   TraerDatosFBConfig,
 } from './src/Modelo/FuncionesFirebaseAuth';
-import AppCheckData from './src/pages/Ingreso/AppCheckData';
+import AppCheckData from './src/pages/Ingreso/Revision/AppCheckData';
 import {
   UIDcurrentUser,
   SalirFBauth,
@@ -69,10 +68,6 @@ export default function App() {
   console.log('##################APP####################');
   return (
     <>
-      {/* {console.log('su configuracion')}
-      {console.log(ConfigState)}
-      {console.log('datos de sesion')}
-      {console.log(UsrSession)} */}
       {UsrSession == null ? (
         <PresentacionApp
           IngresarFBauth={IngresarFBauth}
@@ -83,30 +78,9 @@ export default function App() {
         />
       ) : (
         <>
-          {console.log(ObjUSR)}
-          <AppCheckData
-            ObjUSR={ObjUSR}
-            // GlobalData={GlobalData}
-            // setConfigState={setConfigState}
-          />
+          <AppCheckData ObjUSR={ObjUSR} />
         </>
       )}
-
-      {/* {UsrSession == null ? (
-        <PresentacionApp
-          IngresarFBauth={IngresarFBauth}
-          setUsrSession={setUsrSession}
-          ActualizaFormulario={ActualizaFormulario}
-          Formulario={Formulario}
-          setObjUSR={setObjUSR}
-        />
-      ) : (
-        <AppCheckData
-          // GlobalData={GlobalData}
-          ConfigState={ConfigState}
-          setConfigState={setConfigState}
-        />
-      )} */}
     </>
   );
 }

@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import firebase from '../../libs/Firebase';
+import firebase from '../../../libs/Firebase';
 import {
   UIDcurrentUser,
   ExisteUIDenDB,
   TraerDatosFBConfig,
-} from '../../Modelo/FuncionesFirebaseAuth';
+} from '../../../Modelo/FuncionesFirebaseAuth';
 
-import AppToDo from './AppToDo';
+import AppToDo from '../Aplicacion/AppToDo';
 
-import ConfigStart from '../configs/ConfigsStart';
+import ConfigStart from '../../configs/ConfigsStart';
 
 export default function AppCheckData(props) {
   const {ObjUSR} = props; // son los datos obtenidos desde app
@@ -25,8 +25,6 @@ export default function AppCheckData(props) {
   useEffect(() => {
     // DATOS GLOBALES PARA CONFIGURACION FUTURA
     TraerDatosFBConfig(setGlobalData);
-
-    //traer los datos de esta persona ya logeada
 
     //revisa configuracion Entorno del Usuario
     if (ObjUSR == undefined) {

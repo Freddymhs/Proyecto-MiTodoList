@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import firebase from '../../libs/Firebase';
-import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
+import firebase from '../../../libs/Firebase';
+import StatusBarv2 from '../../../ComponenteGlobales/StatusBarv2';
 import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
 import SafeAreav2, {
   ViewMedio,
@@ -8,12 +8,15 @@ import SafeAreav2, {
   ViewBig,
   ScrollViewv2,
   Tarjeta,
-} from '../../ComponenteGlobales/SeccionMaquetacion';
-import FlatHorizontal from '../../ComponenteGlobales/FlatHorizontal';
-import {Subtitulo} from '../../ComponenteGlobales/Textos';
+} from '../../../ComponenteGlobales/SeccionMaquetacion';
+import FlatHorizontal from '../../../ComponenteGlobales/FlatHorizontal';
+import {Subtitulo} from '../../../ComponenteGlobales/Textos';
 // import ScrollViewv2 from '../../ComponenteGlobales/ScrollViewv2';
-import {SalirFBauth} from '../../Modelo/FuncionesFirebaseAuth';
+import {SalirFBauth} from '../../../Modelo/FuncionesFirebaseAuth';
 
+
+
+const ProyectosPendientes = ['todoListo', 'Api rest en MERN', 'Doname'];
 const QueAreaobjetivos = [
   'testUnitarios',
   'Disenio',
@@ -23,9 +26,6 @@ const QueAreaobjetivos = [
   'Consumo de APIs',
   'app Celular',
 ];
-//estos deben ser objetos bien grandes con SUS DETALLES
-const ProyectosPendientes = ['todoListo', 'Api rest en MERN', 'Doname'];
-
 const MiPlataforma = ['gatsby', 'mern', 'reactnative']; //laravel,python,ruby
 const MisConocimientos = [
   'reactjs',
@@ -39,6 +39,9 @@ const MisConocimientos = [
   'bootstrap',
   'css',
 ];
+
+
+
 var id = 0;
 
 export default function AppToDo(props) {
