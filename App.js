@@ -29,7 +29,6 @@ import {
 } from './src/Modelo/FuncionesFirebaseAuth';
 import ClsUsuario from './src/Modelo/ClsUsuario';
 
-
 // firebase.auth().signOut();
 export default function App() {
   //////////////ALMACENAR DATOS DEL USUARIO
@@ -51,35 +50,6 @@ export default function App() {
         ExisteUIDenDB(response.uid, setObjUSR);
 
         // debemos revisar que objeto usuario exista antes de insertar datos
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
-        console.log(ObjUSR);
         console.log(ObjUSR);
       }
     });
@@ -117,7 +87,6 @@ export default function App() {
           <AppCheckData
             ObjUSR={ObjUSR}
             // GlobalData={GlobalData}
-
             // setConfigState={setConfigState}
           />
         </>

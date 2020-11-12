@@ -53,8 +53,9 @@ export default function AppCheckData(props) {
 
   console.log('#################CHECKDATA################');
   return ConfigState ? (
-    <Text>vamos a la aplicaicon</Text>
+    <AppToDo />
   ) : (
+    // <Text>vamos a la aplicaicon</Text>
     // <UserConfig />;
     <ConfigStart GlobalData={GlobalData} ObjUSR={ObjUSR} />
   );
