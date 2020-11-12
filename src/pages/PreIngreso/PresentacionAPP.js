@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Pressable,
   SafeAreaView,
@@ -8,9 +8,29 @@ import {
   TouchableHighlight,
   View,
   Image,
+  TextInput,
 } from 'react-native';
+import firebase from '../../libs/Firebase';
+import {
+  IngresarFBauth,
+  RegistroAuthFB,
+} from '../../Modelo/FuncionesFirebaseAuth';
 
-export default function PresentacionAPP({SwapScreen}) {
+//clase usuario
+import ClsUsuario from '../../../src/Modelo/ClsUsuario';
+
+//CREACION DE DATOS UUSARIO
+// const Obj = new ClsUsuario();
+
+export default function PresentacionAPP(props) {
+  const {IngresarFBauth} = props;
+  const {ActualizaFormulario} = props;
+  const {Formulario} = props;
+  // const {setObjUSR} = props;
+  const {setGlobalData} = props; // para ver si tiene config al logear simpre
+
+  console.log(setGlobalData);
+
   return (
     <>
       <StatusBar hidden />
@@ -18,7 +38,6 @@ export default function PresentacionAPP({SwapScreen}) {
         <View style={styles.PantallaFull}>
           <View style={styles.MediaPantalla}>
             <Text style={styles.letras}>Mi Todo List APP</Text>
-
             <Image
               style={{
                 width: 120,
@@ -37,13 +56,37 @@ export default function PresentacionAPP({SwapScreen}) {
               Agrega todos los proyectos completados al Portafolios
             </Text>
           </View>
+
           <View style={styles.MediaPantalla}>
+            <View style={styles.areaInputs}>
+              <TextInput
+                onChangeText={(value) => ActualizaFormulario('email', value)}
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Correo Electronico"
+                placeholderTextColor="#9a73ef"
+                autoCapitalize="none"
+              />
+              <TextInput
+                onChangeText={(value) => ActualizaFormulario('password', value)}
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Contraseña"
+                placeholderTextColor="#9a73ef"
+                autoCapitalize="none"
+              />
+            </View>
+
             <Pressable
-              onPress={() => {
-                SwapScreen();
-              }}
+              onPress={() => IngresarFBauth(Formulario)}
               style={styles.btnpressable}>
-              <Text style={styles.txtPressable}>ingresar</Text>
+              <Text style={styles.txtPressable}>Ingresar</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => RegistroAuthFB(Formulario)}
+              style={styles.btnpressable}>
+              <Text style={styles.txtPressable}>Registrarme</Text>
             </Pressable>
           </View>
         </View>
@@ -53,6 +96,18 @@ export default function PresentacionAPP({SwapScreen}) {
 }
 
 const styles = StyleSheet.create({
+  areaInputs: {
+    flexDirection: 'row',
+    backgroundColor: 'blue',
+  },
+  input: {
+    backgroundColor: 'white',
+    width: '50%',
+    borderColor: 'black',
+    borderWidth: 1,
+    textAlign: 'center',
+    justifyContent: 'flex-end',
+  },
   txtPressable: {
     color: '#E91E63',
     fontWeight: 'bold',
