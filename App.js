@@ -28,7 +28,9 @@ import {
   CreandoUsuarioFB,
 } from './src/Modelo/FuncionesFirebaseAuth';
 import ClsUsuario from './src/Modelo/ClsUsuario';
-firebase.auth().signOut();
+
+
+// firebase.auth().signOut();
 export default function App() {
   //////////////ALMACENAR DATOS DEL USUARIO
   const [ObjUSR, setObjUSR] = useState();

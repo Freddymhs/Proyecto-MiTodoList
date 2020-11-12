@@ -25,16 +25,6 @@ export const SalirFBauth = (props) => {
 export const RegistroAuthFB = (props) => {
   var email = props.email;
   var password = props.password;
-
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-  console.log('SE CROE USUARIO EN AUTH');
-
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
