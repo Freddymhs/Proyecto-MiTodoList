@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import firebase from '../../libs/Firebase';
 import StatusBarv2 from '../../ComponenteGlobales/StatusBarv2';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
 import SafeAreav2, {
   ViewMedio,
   ViewSmall,
@@ -11,12 +12,13 @@ import SafeAreav2, {
 import FlatHorizontal from '../../ComponenteGlobales/FlatHorizontal';
 import {Subtitulo} from '../../ComponenteGlobales/Textos';
 // import ScrollViewv2 from '../../ComponenteGlobales/ScrollViewv2';
+import {SalirFBauth} from '../../Modelo/FuncionesFirebaseAuth';
 
 const QueAreaobjetivos = [
   'testUnitarios',
   'Disenio',
   'CRUD',
-  'State Page',
+  'Static Page',
   'Microservicios',
   'Consumo de APIs',
   'app Celular',
@@ -38,12 +40,22 @@ const MisConocimientos = [
   'css',
 ];
 var id = 0;
-export default function AppToDo() {
+
+export default function AppToDo(props) {
+  const {UsrSession} = props;
+  const {setUsrSession} = props;
+
   return (
     <>
       <StatusBarv2 />
       <SafeAreav2>
         <ViewMedio>
+          <Pressable
+            // onPress={() => SalirFBauth({setUsrSession})}
+            onPress={() => SalirFBauth()}
+            style={{height: 100, width: 400, backgroundColor: 'red'}}>
+            <Text>I'm pressable!EEEEEEEE</Text>
+          </Pressable>
           <FlatList
             data={ProyectosPendientes}
             renderItem={({item}) => (
@@ -87,7 +99,5 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'red',
     borderRadius: 6,
-    // backgroundColor: Colors.lighter,
-    // backgroundColor: 'red',
   },
 });

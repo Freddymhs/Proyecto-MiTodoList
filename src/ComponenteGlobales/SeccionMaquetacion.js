@@ -1,6 +1,14 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
+//////////////////////////////////////////////////////////////////////////////////
 // base de la pages
 export const SafeAreav2 = (props) => {
   return (
@@ -44,19 +52,51 @@ export const ViewBig = (props) => {
   return <View style={styles.viewbig}>{props.children}</View>;
 };
 /////////////////////////////////////////
+export const ViewCFG = (props) => {
+  return <View style={styles.ViewConfigUser}>{props.children}</View>;
+};
+
+export const Area2BtnInSmallView = (props) => {
+  return <View style={styles.stylesAreaBtns}>{props.children}</View>;
+};
+
+// /botones
+export const BtnAppPrimary = (props) => {
+  const {fnBtn} = props;
+  return (
+    <Pressable
+      onPress={fnBtn}
+      style={{
+        flex: 1,
+        backgroundColor: '#00BCD4',
+        padding: 20,
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 8,
+      }}>
+      {props.children}
+    </Pressable>
+  );
+};
 
 export default SafeAreav2;
 
 const styles = StyleSheet.create({
-  SafeAreaFull: {
-    padding: 5,
+  stylesAreaBtns: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
-    // backgroundColor: '#f8f8ff',
-    backgroundColor: '#f8f8ff',
   },
-  viewsmall: {
+
+  ViewConfigUser: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#E91E63',
+
     borderWidth: 0,
-    flex: 1,
+    flex: 10,
     marginVertical: 2,
     paddingHorizontal: 17,
     paddingVertical: 22,
@@ -68,8 +108,38 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
-
-    elevation: 9,
+    elevation: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ///////////////////////////////////totales
+  SafeAreaFull: {
+    padding: 5,
+    flex: 1,
+    // backgroundColor: '#f8f8ff',
+    backgroundColor: '#f8f8ff',
+  },
+  viewsmall: {
+    // backgroundColor: 'grey',
+    // marginTop: 20,
+    paddingVertical: 21,
+    paddingHorizontal: 8,
+    flex: 1,
+    borderWidth: 0,
+    // marginVertical: 2,
+    // paddingHorizontal: 17,
+    // paddingVertical: 2,
+    // shadow
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   viewmid: {
     borderWidth: 0,
@@ -86,7 +156,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
 
-    elevation: 9,
+    elevation: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   viewbig: {
     justifyContent: 'space-around',
@@ -104,6 +176,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
 
-    elevation: 9,
+    elevation: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
