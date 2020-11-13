@@ -14,8 +14,6 @@ import {Subtitulo} from '../../../ComponenteGlobales/Textos';
 // import ScrollViewv2 from '../../ComponenteGlobales/ScrollViewv2';
 import {SalirFBauth} from '../../../Modelo/FuncionesFirebaseAuth';
 
-
-
 const ProyectosPendientes = ['todoListo', 'Api rest en MERN', 'Doname'];
 const QueAreaobjetivos = [
   'testUnitarios',
@@ -40,13 +38,9 @@ const MisConocimientos = [
   'css',
 ];
 
-
-
 var id = 0;
-
 export default function AppToDo(props) {
-  const {UsrSession} = props;
-  const {setUsrSession} = props;
+
 
   return (
     <>
@@ -56,7 +50,7 @@ export default function AppToDo(props) {
           <Pressable
             // onPress={() => SalirFBauth({setUsrSession})}
             onPress={() => SalirFBauth()}
-            style={{height: 100, width: 400, backgroundColor: 'red'}}>
+            style={{height: 100, width: 200, backgroundColor: 'red'}}>
             <Text>I'm pressable!EEEEEEEE</Text>
           </Pressable>
           <FlatList
