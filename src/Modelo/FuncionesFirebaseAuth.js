@@ -115,3 +115,16 @@ export const ConfigPerfilUsuario = (uid, setObjUSR) => {
       setObjUSR(snapshot.val());
     });
 };
+
+//obten todos los datos del usuario dentro de la app
+export const SolicitaDatosUser = async ({uid, setUsuario}) => {
+  firebase
+    .database()
+    .ref('/usuarios/' + uid)
+    .once('value', function (snap) {
+      setUsuario(snap.val());
+    });
+  console.log('se pidieron datos del usuario');
+};
+
+//

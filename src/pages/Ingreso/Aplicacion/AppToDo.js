@@ -1,74 +1,105 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
+import PantallaEditar from './PantallaEditar';
+import PantallaListado from './PantallaListado';
+import PantallaConfigProfile from './PantallaConfigProfile';
+import PantallaCrear from './PantallaCrear';
+import {BotonIrAtras} from '../../../Modelo/FuncionesCelular';
+import {SolicitaDatosUser} from '../../../Modelo/FuncionesFirebaseAuth';
+
+import firebase from '../../../libs/Firebase';
 
 export default function AppToDo(props) {
-  const nameScreen = [
-    'ToDo List ',
-    'ToDo Create',
-    'ToDo Edit',
-    'ToDo Configure',
-  ];
-  var TaskPendienteFake = [
-    {
-      name: 'mi proyecto n1',
-      description: 'este proyecto ayuda a mis causas',
-      operations: 'operaciones necesarias para completarse',
-      deploy: 'como se piensa desplegar el proyecto',
-      platforms: ['a', 'b', 'c', 'd', 'e', 'f'],
-      skills: ['1', '2', '3', '4', '5', '6'],
-      areas: ['q', 'w', 'e', 'r', 't', 'y'],
-    },
-    {
-      name: 'mi proyecto n2',
-      description: 'este proyecto ayuda a mis causas 2',
-      operations: 'operaciones necesarias para completarse 2',
-      deploy: 'como se piensa desplegar el proyecto 2',
-      platforms: ['a', 'b', 'c', 'd', 'e', 'f'],
-      skills: ['1', '2', '3', '4', '5', '6'],
-      areas: ['q', 'w', 'e', 'r', 't', 'y'],
-    },
-  ];
-
-  var SettingUsuario = 'donde esta esto?';
-
-  const SwapPantalla = () => {
-    console.log('vamos a camibiar a la pantalla ..._______?');
+  //0 solicita datos de forma dinamica
+  const {ObjUSR} = props;
+  const RefreshData = () => {
+    const uid = ObjUSR.uid;
+    try {
+      SolicitaDatosUser({uid, setUsuario});
+      console.log('se piden datos');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const [stateListadoTareas, setstateListadoTareas] = useState({});
-  const [statePantalla, setstatePantalla] = useState(0);
-
   useEffect(() => {
-    console.log('todos los datos cargados son estos  datos');
+    RefreshData();
+  }, []);
+  ////////////////////////////////////////////////////////////////
+  const [Usuario, setUsuario] = useState({});
+
+  //req 1 nombres
+  const nameScreen = [
+    'ToDo List ',
+    'ToDo Edit',
+    'ToDo Create',
+    'ToDo Configure',
+  ];
+  //req 2 pendientes
+  const [stateListadoTareas, setstateListadoTareas] = useState({});
+  useEffect(() => {
+    setstateListadoTareas(Usuario.ToDoList);
+  }, []);
+  //req 3 settings
+  var SettingA = Usuario.AreaUSR;
+  var SettingB = Usuario.PlatformUSR;
+  var SettingC = Usuario.SkillUSR;
+
+  //req 4 swaps , posicion actual y previo
+  const [allScreen, setallScreen] = useState(0);
+  const Posiciones = {
+    posList: 0,
+    posEdit: 1,
+    posCreate: 2,
+    posProfile: 3,
+  };
+  const ToOtherScreen = (x) => {
+    setallScreen(x);
+  };
+
+  //funciones de bootnes hardware, disponible para todas las sub pantallas
+  useEffect(() => {
+    BotonIrAtras({ToOtherScreen, Posiciones});
   }, []);
 
-  switch (statePantalla) {
+  //main
+  switch (allScreen) {
     case 0:
       return (
-        <View>
-          <Text>0</Text>
-        </View>
+        <PantallaListado
+          RefreshData={RefreshData}
+          stateListadoTareas={stateListadoTareas}
+          nameScreen={nameScreen[0]}
+          Posiciones={Posiciones}
+          ToOtherScreen={ToOtherScreen}
+        />
       );
       break;
     case 1:
       return (
-        <View>
-          <Text>1</Text>
-        </View>
+        <PantallaEditar
+          nameScreen={nameScreen[1]}
+          Posiciones={Posiciones}
+          ToOtherScreen={ToOtherScreen}
+        />
       );
       break;
     case 2:
       return (
-        <View>
-          <Text>2</Text>
-        </View>
+        <PantallaCrear
+          nameScreen={nameScreen[2]}
+          Posiciones={Posiciones}
+          ToOtherScreen={ToOtherScreen}
+        />
       );
       break;
     case 3:
       return (
-        <View>
-          <Text>3</Text>
-        </View>
+        <PantallaConfigProfile
+          nameScreen={nameScreen[3]}
+          Posiciones={Posiciones}
+          ToOtherScreen={ToOtherScreen}
+        />
       );
       break;
 
