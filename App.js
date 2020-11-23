@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   Alert,
+  PixelRatio,
 } from 'react-native';
 // mis componentes
 import PresentacionApp from './src/pages/PreIngreso/PresentacionAPP';

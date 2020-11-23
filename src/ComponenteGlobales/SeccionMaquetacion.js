@@ -20,7 +20,11 @@ export const ScrollViewv2 = (props) => {
 
   //////////CREA un area para hacer scroll ajustado al padre
   return (
-    <ScrollView contentContainerStyle={{flex: 1}}>{props.children}</ScrollView>
+    <ScrollView
+    // contentContainerStyle={{flex: 1}}
+    >
+      {props.children}
+    </ScrollView>
   );
 };
 ///////////////////////////TARJETAS DENTRO DE LAS LISTAS LARETALES
@@ -68,9 +72,11 @@ export const BtnAppPrimary = (props) => {
       onPress={fnBtn}
       style={{
         flex: 1,
-        backgroundColor: '#00BCD4',
+        backgroundColor: '#FFFFFF',
+        borderColor: '#E91E63',
+        borderWidth: 4,
         padding: 20,
-        borderRadius: 20,
+        borderRadius: 13,
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 8,
