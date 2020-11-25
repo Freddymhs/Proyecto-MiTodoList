@@ -1,16 +1,19 @@
 import React, {useEffect} from 'react';
 import {Button, FlatList, Image, SafeAreaView, Text, View} from 'react-native';
+import { ViewTitleLeft } from '../../../ComponenteGlobales/SeccionMaquetacion';
 import {SalirFBauth} from '../../../Modelo/FuncionesFirebaseAuth';
 
 const PantallaListado = (props) => {
-  const {RefreshData} = props;
   useEffect(() => {
     console.log('se cargo listado');
+    console.log(ToDoList);
   }, []);
 
   const {stateListadoTareas} = props;
   const {ToOtherScreen, Posiciones} = props;
   const {nameScreen} = props;
+
+  const {ToDoList} = props;
 
   const ProyectosPendientes = [
     'todoListo',
@@ -32,73 +35,68 @@ const PantallaListado = (props) => {
   // console.log(ProyectosPendientes);
   // console.log(stateListadoTareas[0].Skill);
   var id = 0;
+  // console.log(ToDoList);
   return (
     <SafeAreaView style={{backgroundColor: '#E91E63', flex: 1}}>
-      <View style={{width: '33%'}}>
-        <Text style={{fontSize: 48, color: '#fafafa'}}>{nameScreen}</Text>
-      </View>
-
+      <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
       <View>
-        <FlatList
-          data={stateListadoTareas}
-          renderItem={({item}) => (
-            <View
-              style={{
-                paddingBottom: 22,
-                paddingTop: 22,
-                paddingHorizontal: 18,
-              }}>
-              <View
-                style={{
-                  paddingBottom: 7,
-                  borderBottomColor: '#fafafa',
-                  borderBottomWidth: 2,
-                  flexDirection: 'row',
-                }}>
-                {/* <Text style={{flex: 1}}>{item.estado}</Text> */}
+        {ToDoList ? (
+          // <FlatList
+          //   data={ToDoList}
+          //   renderItem={({item}) => (
+          //     <View
+          //       style={{
+          //         paddingBottom: 22,
+          //         paddingTop: 22,
+          //         paddingHorizontal: 18,
+          //       }}>
+          //       <View
+          //         style={{
+          //           paddingBottom: 7,
+          //           borderBottomColor: '#fafafa',
+          //           borderBottomWidth: 2,
+          //           flexDirection: 'row',
+          //         }}>
+          //         {/* <Text style={{flex: 1}}>{item.estado}</Text> */}
 
-                {item.estado == 0 ? (
-                  <Image
-                    style={{
-                      flex: 1,
-                      width: undefined,
-                      height: undefined,
-                      resizeMode: 'contain',
-                    }}
-                    source={require('../../../images/esperando.png')}
-                  />
-                ) : (
-                  <Image
-                    style={{
-                      flex: 1,
-                      width: undefined,
-                      height: undefined,
-                      resizeMode: 'contain',
-                    }}
-                    source={require('../../../images/activado.png')}
-                  />
-                )}
-                <Text
-                  style={{
-                    color: '#fafafa',
-                    flex: 3,
+          //         {item.estado == 0 ? (
+          //           <Image
+          //             style={{
+          //               flex: 1,
+          //               width: undefined,
+          //               height: undefined,
+          //               resizeMode: 'contain',
+          //             }}
+          //             source={require('../../../images/esperando.png')}
+          //           />
+          //         ) : (
+          //           <Image
+          //             style={{
+          //               flex: 1,
+          //               width: undefined,
+          //               height: undefined,
+          //               resizeMode: 'contain',
+          //             }}
+          //             source={require('../../../images/activado.png')}
+          //           />
+          //         )}
+          //         <Text
+          //           style={{
+          //             color: '#fafafa',
+          //             flex: 3,
 
-                    textAlign: 'center',
-                  }}>
-                  {item.name}
-                </Text>
-              </View>
-            </View>
-          )}
-        />
-        {/* <FlatList
-          data={ProyectosPendientes}
-          renderItem={({item}) => (
-            <Text key={id++}>
-              {id} {item}
-            </Text>
-          )}
-        /> */}
+          //             textAlign: 'center',
+          //           }}>
+          //           {item.name}
+          //         </Text>
+          //       </View>
+          //     </View>
+          //   )}
+          // />
+          <Text>existen datos</Text>
+        ) : (
+          <Text>aun no tienes un todolist</Text>
+        )}
       </View>
 
       <View>
@@ -110,9 +108,6 @@ const PantallaListado = (props) => {
         // onPress={() => {
         //   ToOtherScreen(Posiciones.posList);
         // }}
-        onPress={() => {
-          RefreshData();
-        }}
       />
       <Button
         title="Editar este ToDo"

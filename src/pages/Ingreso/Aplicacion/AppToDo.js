@@ -5,29 +5,16 @@ import PantallaListado from './PantallaListado';
 import PantallaConfigProfile from './PantallaConfigProfile';
 import PantallaCrear from './PantallaCrear';
 import {BotonIrAtras} from '../../../Modelo/FuncionesCelular';
-import {SolicitaDatosUser} from '../../../Modelo/FuncionesFirebaseAuth';
+import {WatchFirebaseToDo} from '../../../Modelo/FuncionesFirebaseAuth';
 
 import firebase from '../../../libs/Firebase';
 
 export default function AppToDo(props) {
-  //0 solicita datos de forma dinamica
-  const {ObjUSR} = props;
-  const RefreshData = () => {
-    const uid = ObjUSR.uid;
-    try {
-      SolicitaDatosUser({uid, setUsuario});
-      console.log('se piden datos');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    RefreshData();
+    WatchFirebaseToDo({ObjUSR, setToDoList});
   }, []);
-  ////////////////////////////////////////////////////////////////
-  const [Usuario, setUsuario] = useState({});
 
+  const {ObjUSR} = props;
   //req 1 nombres
   const nameScreen = [
     'ToDo List ',
@@ -35,15 +22,15 @@ export default function AppToDo(props) {
     'ToDo Create',
     'ToDo Configure',
   ];
+
   //req 2 pendientes
-  const [stateListadoTareas, setstateListadoTareas] = useState({});
-  useEffect(() => {
-    setstateListadoTareas(Usuario.ToDoList);
-  }, []);
+  // const [stateListadoTareas, setstateListadoTareas] = useState({});
+  const [ToDoList, setToDoList] = useState();
+
   //req 3 settings
-  var SettingA = Usuario.AreaUSR;
-  var SettingB = Usuario.PlatformUSR;
-  var SettingC = Usuario.SkillUSR;
+  var SettingA = ObjUSR.AreaUSR;
+  var SettingB = ObjUSR.PlatformUSR;
+  var SettingC = ObjUSR.SkillUSR;
 
   //req 4 swaps , posicion actual y previo
   const [allScreen, setallScreen] = useState(0);
@@ -57,7 +44,7 @@ export default function AppToDo(props) {
     setallScreen(x);
   };
 
-  //funciones de bootnes hardware, disponible para todas las sub pantallas
+  //funciones de bootnes hardware, dispon.ible para todas las sub pantallas
   useEffect(() => {
     BotonIrAtras({ToOtherScreen, Posiciones});
   }, []);
@@ -67,8 +54,7 @@ export default function AppToDo(props) {
     case 0:
       return (
         <PantallaListado
-          RefreshData={RefreshData}
-          stateListadoTareas={stateListadoTareas}
+          ToDoList={ToDoList}
           nameScreen={nameScreen[0]}
           Posiciones={Posiciones}
           ToOtherScreen={ToOtherScreen}
@@ -87,6 +73,12 @@ export default function AppToDo(props) {
     case 2:
       return (
         <PantallaCrear
+          ObjUSR={ObjUSR}
+          ToDoList={ToDoList}
+          setToDoList={setToDoList}
+          SettingA={SettingA}
+          SettingB={SettingB}
+          SettingC={SettingC}
           nameScreen={nameScreen[2]}
           Posiciones={Posiciones}
           ToOtherScreen={ToOtherScreen}

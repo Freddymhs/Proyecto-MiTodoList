@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 
@@ -64,6 +65,13 @@ export const Area2BtnInSmallView = (props) => {
   return <View style={styles.stylesAreaBtns}>{props.children}</View>;
 };
 
+export const ViewTitleLeft = (props) => {
+  return (
+    <View style={{width: '36%'}}>
+      <Text style={{fontSize: 48, color: '#fafafa'}}>{props.children}</Text>
+    </View>
+  );
+};
 // /botones
 export const BtnAppPrimary = (props) => {
   const {fnBtn} = props;
@@ -83,6 +91,73 @@ export const BtnAppPrimary = (props) => {
       }}>
       {props.children}
     </Pressable>
+  );
+};
+
+//INPUTS generales de la aplicaicon  INPUTS
+
+// export const InputOneline = ({titulo, actualizaTexto, typo}) => {
+//   console.log(titulo);
+//   console.log(actualizaTexto);
+//   console.log(typo);
+//   return (
+//     <View
+//       style={{
+//         padding: 7,
+//         borderBottomWidth: 2,
+//         borderBottomColor: 'white',
+//       }}>
+//       <TextInput
+//         style={{fontSize: 21, color: 'white'}}
+//         placeholder="Nombre de tu Proyecto"
+//         onChangeText={(e, name) => {
+//           actualizaTexto(e, 'name');
+//         }}
+//       />
+//     </View>
+//   );
+// };
+
+export const InputOneline = (props) => {
+  const {tipo, texto, fnc} = props;
+
+  return (
+    <View
+      style={{
+        padding: 7,
+        marginHorizontal: 7,
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
+      }}>
+      <TextInput
+        style={{fontSize: 21, color: 'white'}}
+        placeholder={texto}
+        onChangeText={(e, type) => fnc(e, tipo)}
+      />
+    </View>
+  );
+};
+export const InputMultipleLine = (props) => {
+  const {tipo, texto, fnc} = props;
+
+  return (
+    <View
+      style={{
+        padding: 7,
+        marginHorizontal: 7,
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
+      }}>
+      <TextInput
+        multiline={true}
+        numberOfLines={5}
+        style={{fontSize: 21, color: 'white'}}
+        placeholder={texto}
+        onChangeText={(e, type) => {
+          fnc(e, tipo);
+        }}
+      />
+    </View>
   );
 };
 
@@ -124,6 +199,28 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#f8f8ff',
     backgroundColor: '#f8f8ff',
+  },
+  viewTitleleft: {
+    // backgroundColor: 'grey',
+    // marginTop: 20,
+    paddingVertical: 21,
+    paddingHorizontal: 8,
+    flex: 1,
+    borderWidth: 0,
+    // marginVertical: 2,
+    // paddingHorizontal: 17,
+    // paddingVertical: 2,
+    // shadow
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 3,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   viewsmall: {
     // backgroundColor: 'grey',

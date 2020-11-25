@@ -116,15 +116,38 @@ export const ConfigPerfilUsuario = (uid, setObjUSR) => {
     });
 };
 
-//obten todos los datos del usuario dentro de la app
-export const SolicitaDatosUser = async ({uid, setUsuario}) => {
-  firebase
-    .database()
-    .ref('/usuarios/' + uid)
-    .once('value', function (snap) {
-      setUsuario(snap.val());
-    });
-  console.log('se pidieron datos del usuario');
-};
+// //obten todos los datos del usuario dentro de la app
+// export const SolicitaDatosUser = async ({uid, setUsuario}) => {
+//   firebase
+//     .database()
+//     .ref('/usuarios/' + uid)
+//     .once('value', function (snap) {
+//       setUsuario(snap.val());
+//     });
+// };
 
-//
+// //
+
+export const WatchFirebaseToDo = (props) => {
+  console.log('=====================================================x====');
+  const {ObjUSR} = props;
+  const {setToDoList} = props;
+
+  try {
+    firebase
+      .database()
+      .ref('/usuarios/' + ObjUSR.uid + '/ToDoList')
+      .once('value', function (snapshot) {
+        if (snapshot.val() !== null) {
+          setToDoList(snapshot.val());
+
+          //pasa listado tareas
+        } else {
+          console.log('sin datos');
+          setToDoList(undefined);
+        }
+      });
+  } catch (error) {
+    console.log('error al consultar a la base de datos');
+  }
+};
