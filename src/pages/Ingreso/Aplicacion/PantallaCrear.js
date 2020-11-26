@@ -90,17 +90,18 @@ const PantallaCrear = (props) => {
       res.Platform.length > 1 ||
       res.Area.length > 4
     ) {
-      // console.log('objeto no valido!');
-      return false;
+      return false; // console.log('objeto no valido!');
     } else {
-      // console.log('objeto aceptado, valido!');
-      return res;
+      return res; // console.log('objeto aceptado, valido!');
     }
   };
+
   //emergencia :c
-  const [BANDERA, setBANDERA] = useState([]);
+  const [BANDERA, setBANDERA] = useState();
   useEffect(() => {
     NewToDoTask(ToDoList, ObjUSR);
+    // console.log('se ejecuto la bandera');
+
   }, [BANDERA]);
 
   //4 subir objeto a firebase

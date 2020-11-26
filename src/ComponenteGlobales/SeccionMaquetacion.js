@@ -68,7 +68,7 @@ export const Area2BtnInSmallView = (props) => {
 
 export const ViewTitleLeft = (props) => {
   return (
-    <View style={{width: '36%'}}>
+    <View style={{width: '36%', marginBottom: 34}}>
       <Text style={{fontSize: 48, color: '#fafafa'}}>{props.children}</Text>
     </View>
   );
@@ -76,11 +76,13 @@ export const ViewTitleLeft = (props) => {
 // /botones
 export const BtnAppPrimary = (props) => {
   const {fnBtn} = props;
+
   return (
     <Pressable
-      onPress={fnBtn}
+      onPress={() => {
+        fnBtn();
+      }}
       style={{
-        flex: 1,
         backgroundColor: '#FFFFFF',
         borderColor: '#E91E63',
         borderWidth: 4,
@@ -90,11 +92,52 @@ export const BtnAppPrimary = (props) => {
         justifyContent: 'center',
         marginHorizontal: 8,
       }}>
-      {props.children}
+      <Text
+        style={{
+          fontSize: 21,
+          color: '#E91E63',
+        }}>
+        {props.children}
+      </Text>
     </Pressable>
   );
 };
 
+export const BtnAppSecondary = (props) => {
+  const {fnBtn} = props;
+  return (
+    <Pressable
+      onPress={() => {
+        fnBtn();
+      }}
+      style={{
+        backgroundColor: '#E91E63',
+        borderColor: 'white',
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        elevation: 0,
+        shadowOpacity: 0.34,
+        shadowRadius: 0,
+
+        // borderWidth: 4,
+        padding: 20,
+        borderRadius: 13,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 8,
+      }}>
+      <Text
+        style={{
+          fontSize: 21,
+          color: 'white',
+        }}>
+        {props.children}
+      </Text>
+    </Pressable>
+  );
+};
 //INPUTS generales de la aplicaicon  INPUTS
 
 // export const InputOneline = ({titulo, actualizaTexto, typo}) => {

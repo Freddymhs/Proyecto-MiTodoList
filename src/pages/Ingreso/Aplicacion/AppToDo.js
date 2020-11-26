@@ -10,9 +10,10 @@ import {WatchFirebaseToDo} from '../../../Modelo/FuncionesFirebaseAuth';
 import firebase from '../../../libs/Firebase';
 
 export default function AppToDo(props) {
+  
   useEffect(() => {
     WatchFirebaseToDo({ObjUSR, setToDoList});
-  }, []);
+  }, [allScreen]);
 
   const {ObjUSR} = props;
   //req 1 nombres
@@ -54,6 +55,9 @@ export default function AppToDo(props) {
     case 0:
       return (
         <PantallaListado
+          WatchFirebaseToDo={WatchFirebaseToDo}
+          ObjUSR={ObjUSR}
+          setToDoList={setToDoList}
           ToDoList={ToDoList}
           nameScreen={nameScreen[0]}
           Posiciones={Posiciones}

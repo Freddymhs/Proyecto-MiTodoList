@@ -1,12 +1,28 @@
 import React, {useEffect} from 'react';
-import {Button, FlatList, Image, SafeAreaView, Text, View} from 'react-native';
-import {ViewTitleLeft} from '../../../ComponenteGlobales/SeccionMaquetacion';
+import {
+  Button,
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
+import {
+  BtnAppSecondary,
+  ViewTitleLeft,
+} from '../../../ComponenteGlobales/SeccionMaquetacion';
 import {SalirFBauth} from '../../../Modelo/FuncionesFirebaseAuth';
 
+import {BtnAppPrimary} from '../../../ComponenteGlobales/SeccionMaquetacion';
 const PantallaListado = (props) => {
+  const {ObjUSR} = props;
+  const {setToDoList} = props;
+  const {WatchFirebaseToDo} = props;
+  //recarga datos de la patalla
   useEffect(() => {
+    WatchFirebaseToDo({ObjUSR, setToDoList});
     console.log('se cargo listado');
-    console.log(ToDoList);
   }, []);
 
   const {stateListadoTareas} = props;
@@ -14,28 +30,6 @@ const PantallaListado = (props) => {
   const {nameScreen} = props;
 
   const {ToDoList} = props;
-
-  const ProyectosPendientes = [
-    'todoListo',
-    'Api rest en MERN',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-    'Doname',
-  ];
-
-  // console.log("'''''''''''''''''''''''''''''''''''''''''");
-  // console.log(stateListadoTareas);
-  // console.log(ProyectosPendientes);
-  // console.log(stateListadoTareas[0].Skill);
-  var id = 0;
-  // console.log(ToDoList);
   return (
     <SafeAreaView style={{backgroundColor: '#E91E63', flex: 1}}>
       <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
@@ -57,8 +51,6 @@ const PantallaListado = (props) => {
                     borderBottomWidth: 2,
                     flexDirection: 'row',
                   }}>
-                  {/* <Text style={{flex: 1}}>{item.estado}</Text> */}
-
                   {item.estado == 0 ? (
                     <Image
                       style={{
@@ -83,9 +75,9 @@ const PantallaListado = (props) => {
                   <Text
                     style={{
                       color: '#fafafa',
-                      flex: 3,
-
+                      flex: 6,
                       textAlign: 'center',
+                      fontSize: 24,
                     }}>
                     {item.name}
                   </Text>
@@ -94,45 +86,55 @@ const PantallaListado = (props) => {
             )}
           />
         ) : (
-          // <Text>existen datos</Text>
-          <Text>aun no tienes un todolist</Text>
+          <>
+            <Text
+              style={{
+                paddingVertical: 100,
+                textAlign: 'center',
+                textAlignVertical: 'center',
+                fontSize: 34,
+                backgroundColor: 'white',
+                color: '#E91E63',
+              }}>
+              Primero Crea tu Primer ToDo
+            </Text>
+            <Text
+              style={{
+                fontSize: 80,
+                color: 'white',
+                textAlign: 'center',
+                textAlignVertical: 'center',
+              }}>
+              ⬇
+            </Text>
+          </>
         )}
       </View>
 
-      <View>
-        <Text>Settings del usuario actual</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+        }}>
+        <BtnAppPrimary
+          fnBtn={() => {
+            ToOtherScreen(Posiciones.posCreate);
+          }}>
+          Crear ToDo
+        </BtnAppPrimary>
       </View>
-
-      <Button
-        title="Listado"
-        // onPress={() => {
-        //   ToOtherScreen(Posiciones.posList);
-        // }}
-      />
-      <Button
-        title="Editar este ToDo"
-        onPress={() => {
-          ToOtherScreen(Posiciones.posEdit);
-        }}
-      />
-      <Button
-        title="Crear ToDo"
-        onPress={() => {
-          ToOtherScreen(Posiciones.posCreate);
-        }}
-      />
-      <Button
-        title="Configurar mi Perfil"
-        onPress={() => {
-          ToOtherScreen(Posiciones.posProfile);
-        }}
-      />
-      <Button
-        title="Log Out"
-        onPress={() => {
-          SalirFBauth();
-        }}
-      />
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+        }}>
+        <BtnAppSecondary
+          fnBtn={() => {
+            SalirFBauth();
+          }}>
+          <Text>Log Out 🤚</Text>
+        </BtnAppSecondary>
+      </View>
     </SafeAreaView>
   );
 };
