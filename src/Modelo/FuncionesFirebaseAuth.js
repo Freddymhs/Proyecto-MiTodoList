@@ -153,13 +153,14 @@ export const WatchFirebaseToDo = (props) => {
 };
 
 export const NewToDoTask = (nuevoTask, ObjUSR) => {
-  // console.log('se sube');
   try {
     firebase
       .database()
       .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
       .set(nuevoTask);
-      Alert.alert('Se agrego a tu Lista' + ObjUSR.name)
+    Alert.alert(
+      'Nuevo Proyecto Agregado!' + '\n ' + nuevoTask[nuevoTask.length - 1].name,
+    );
   } catch (error) {
     console.log(error);
   }

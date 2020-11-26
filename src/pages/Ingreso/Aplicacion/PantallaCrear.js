@@ -68,8 +68,8 @@ const PantallaCrear = (props) => {
 
   //3 crear un objeto  y validar
   const CrearTAREA = (form, newAsettings, newBsettings, newCsettings) => {
-    //nuevo
-    const res = {
+    // asigna
+    res = {
       name: form.name,
       operation: form.operation,
       estado: 0,
@@ -96,27 +96,55 @@ const PantallaCrear = (props) => {
     }
   };
 
-  //emergencia :c
-  const [BANDERA, setBANDERA] = useState();
+  const [BANDERA, setBANDERA] = useState(false);
   useEffect(() => {
-    NewToDoTask(ToDoList, ObjUSR);
-    // console.log('se ejecuto la bandera');
+    if (BANDERA == true) {
+      NewToDoTask(ToDoList, ObjUSR);
+      ToOtherScreen(Posiciones.posList);
+      setBANDERA(false);
+  
 
+    } else {
+      console.log('solo se recargo el componente');
+    }
   }, [BANDERA]);
 
-  //4 subir objeto a firebase
   const SubeDatosAFirebase = () => {
     const res = CrearTAREA(form, newAsettings, newBsettings, newCsettings);
     if (res == false) {
-      console.log('falla en el formulario , validacion no aceptada');
+      Alert.alert('error en su formulario');
     } else {
+      console.log('formulario perfecto');
+      const resultado = false;
+
       if (ToDoList == undefined) {
         setToDoList([res]);
-        setBANDERA([res]); // CUANDO  CAMBIA ACTIVA USSEFECT
+        setBANDERA(true);
+        // NewToDoTask(ToDoList, ObjUSR);
       } else {
-        console.log('iterar');
-        setToDoList([...ToDoList, res]);
-        setBANDERA([...ToDoList, res]); // CUANDO  CAMBIA ACTIVA USSEFECT
+        const DataDuplicado = (name) => {
+          let existencia = false;
+          ToDoList.map((x) => {
+            if (x.name == name) {
+              existencia = true;
+            } else {
+              console.log(x.name);
+              console.log(name);
+              existencia = false;
+            }
+          });
+          return existencia;
+        };
+        const resultado = DataDuplicado(res.name);
+
+        if (resultado) {
+          Alert.alert('no podemos agregar porque YA EXISTE');
+        } else {
+          console.log('iterar');
+          setToDoList([...ToDoList, res]);
+          setBANDERA(true);
+          // NewToDoTask(ToDoList, ObjUSR);
+        }
       }
     }
   };

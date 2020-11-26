@@ -5,6 +5,7 @@ import {
   Image,
   Pressable,
   SafeAreaView,
+  ScrollView,
   Text,
   View,
 } from 'react-native';
@@ -32,85 +33,88 @@ const PantallaListado = (props) => {
   const {ToDoList} = props;
   return (
     <SafeAreaView style={{backgroundColor: '#E91E63', flex: 1}}>
-      <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
-      <View>
-        {ToDoList ? (
-          <FlatList
-            data={ToDoList}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  paddingBottom: 22,
-                  paddingTop: 22,
-                  paddingHorizontal: 18,
-                }}>
-                <View
-                  style={{
-                    paddingBottom: 7,
-                    borderBottomColor: '#fafafa',
-                    borderBottomWidth: 2,
-                    flexDirection: 'row',
-                  }}>
-                  {item.estado == 0 ? (
-                    <Image
-                      style={{
-                        flex: 1,
-                        width: undefined,
-                        height: undefined,
-                        resizeMode: 'contain',
-                      }}
-                      source={require('../../../images/esperando.png')}
-                    />
-                  ) : (
-                    <Image
-                      style={{
-                        flex: 1,
-                        width: undefined,
-                        height: undefined,
-                        resizeMode: 'contain',
-                      }}
-                      source={require('../../../images/activado.png')}
-                    />
-                  )}
-                  <Text
+      <View style={{flex: 3, justifyContent: 'flex-start'}}>
+        <ScrollView>
+          <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
+          <View>
+            {ToDoList ? (
+              <FlatList
+                data={ToDoList}
+                renderItem={({item}) => (
+                  <View
                     style={{
-                      color: '#fafafa',
-                      flex: 6,
-                      textAlign: 'center',
-                      fontSize: 24,
+                      paddingBottom: 22,
+                      paddingTop: 22,
+                      paddingHorizontal: 18,
                     }}>
-                    {item.name}
-                  </Text>
-                </View>
-              </View>
+                    <View
+                      style={{
+                        paddingBottom: 7,
+                        borderBottomColor: '#fafafa',
+                        borderBottomWidth: 2,
+                        flexDirection: 'row',
+                      }}>
+                      {item.estado == 0 ? (
+                        <Image
+                          style={{
+                            flex: 1,
+                            width: undefined,
+                            height: undefined,
+                            resizeMode: 'contain',
+                          }}
+                          source={require('../../../images/esperando.png')}
+                        />
+                      ) : (
+                        <Image
+                          style={{
+                            flex: 1,
+                            width: undefined,
+                            height: undefined,
+                            resizeMode: 'contain',
+                          }}
+                          source={require('../../../images/activado.png')}
+                        />
+                      )}
+                      <Text
+                        style={{
+                          color: '#fafafa',
+                          flex: 6,
+                          textAlign: 'center',
+                          fontSize: 24,
+                        }}>
+                        {item.name}
+                      </Text>
+                    </View>
+                  </View>
+                )}
+              />
+            ) : (
+              <>
+                <Text
+                  style={{
+                    paddingVertical: 100,
+                    textAlign: 'center',
+                    textAlignVertical: 'center',
+                    fontSize: 34,
+                    backgroundColor: 'white',
+                    color: '#E91E63',
+                  }}>
+                  Primero Crea tu Primer ToDo
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 80,
+                    color: 'white',
+                    textAlign: 'center',
+                    textAlignVertical: 'center',
+                  }}>
+                  ⬇
+                </Text>
+              </>
             )}
-          />
-        ) : (
-          <>
-            <Text
-              style={{
-                paddingVertical: 100,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                fontSize: 34,
-                backgroundColor: 'white',
-                color: '#E91E63',
-              }}>
-              Primero Crea tu Primer ToDo
-            </Text>
-            <Text
-              style={{
-                fontSize: 80,
-                color: 'white',
-                textAlign: 'center',
-                textAlignVertical: 'center',
-              }}>
-              ⬇
-            </Text>
-          </>
-        )}
+          </View>
+        </ScrollView>
       </View>
-
       <View
         style={{
           flex: 1,
@@ -122,12 +126,7 @@ const PantallaListado = (props) => {
           }}>
           Crear ToDo
         </BtnAppPrimary>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'flex-end',
-        }}>
+
         <BtnAppSecondary
           fnBtn={() => {
             SalirFBauth();
