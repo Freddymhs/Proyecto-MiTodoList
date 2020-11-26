@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import {FlatGrid} from 'react-native-super-grid';
 
 //////////////////////////////////////////////////////////////////////////////////
 // base de la pages
@@ -124,6 +125,7 @@ export const InputOneline = (props) => {
   return (
     <View
       style={{
+        marginTop: 34,
         padding: 7,
         marginHorizontal: 7,
         borderBottomWidth: 2,
@@ -132,6 +134,7 @@ export const InputOneline = (props) => {
       <TextInput
         style={{fontSize: 21, color: 'white'}}
         placeholder={texto}
+        placeholderTextColor="white"
         onChangeText={(e, type) => fnc(e, tipo)}
       />
     </View>
@@ -143,6 +146,7 @@ export const InputMultipleLine = (props) => {
   return (
     <View
       style={{
+        marginTop: 34,
         padding: 7,
         marginHorizontal: 7,
         borderBottomWidth: 2,
@@ -152,12 +156,90 @@ export const InputMultipleLine = (props) => {
         multiline={true}
         numberOfLines={5}
         style={{fontSize: 21, color: 'white'}}
+        placeholderTextColor="white"
         placeholder={texto}
         onChangeText={(e, type) => {
           fnc(e, tipo);
         }}
       />
     </View>
+  );
+};
+
+export const ItemMultipleSelect = (props) => {
+  const {actuales} = props;
+  const {nuevosdatos} = props;
+  const {setnuevosdatos} = props;
+  const {fncactualizar} = props;
+  const {titulo} = props;
+
+  return (
+    <>
+      <Text
+        style={{
+          marginTop: 55,
+          textAlign: 'center',
+          fontWeight: 'bold',
+          color: 'white',
+          fontSize: 34,
+        }}>
+        {titulo}
+      </Text>
+
+      <FlatGrid
+        itemDimension={100}
+        spacing={30}
+        data={actuales}
+        renderItem={({item}) => {
+          if (nuevosdatos.includes(item)) {
+            return (
+              <Text
+                onPress={() => {
+                  fncactualizar(item, 'skill', nuevosdatos, setnuevosdatos);
+                }}
+                style={{
+                  color: '#E91E63',
+                  fontSize: 19,
+                  paddingVertical: 40,
+                  backgroundColor: 'white',
+                  textAnchor: 'middle',
+                  fontWeight: 'bold',
+                  textAlignVertical: 'center',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  borderRadius: 9,
+                  borderWidth: 1,
+                  borderColor: 'white',
+                }}>
+                {item}
+              </Text>
+            );
+          } else {
+            return (
+              <Text
+                onPress={() => {
+                  fncactualizar(item, 'skill', nuevosdatos, setnuevosdatos);
+                }}
+                style={{
+                  color: 'white',
+                  fontSize: 19,
+                  paddingVertical: 40,
+                  textAnchor: 'middle',
+                  fontWeight: 'bold',
+                  textAlignVertical: 'center',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  borderRadius: 9,
+                  borderWidth: 0.7,
+                  borderColor: 'white',
+                }}>
+                {item}
+              </Text>
+            );
+          }
+        }}
+      />
+    </>
   );
 };
 

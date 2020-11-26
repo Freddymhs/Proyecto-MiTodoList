@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Button, FlatList, Image, SafeAreaView, Text, View} from 'react-native';
-import { ViewTitleLeft } from '../../../ComponenteGlobales/SeccionMaquetacion';
+import {ViewTitleLeft} from '../../../ComponenteGlobales/SeccionMaquetacion';
 import {SalirFBauth} from '../../../Modelo/FuncionesFirebaseAuth';
 
 const PantallaListado = (props) => {
@@ -41,60 +41,60 @@ const PantallaListado = (props) => {
       <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
       <View>
         {ToDoList ? (
-          // <FlatList
-          //   data={ToDoList}
-          //   renderItem={({item}) => (
-          //     <View
-          //       style={{
-          //         paddingBottom: 22,
-          //         paddingTop: 22,
-          //         paddingHorizontal: 18,
-          //       }}>
-          //       <View
-          //         style={{
-          //           paddingBottom: 7,
-          //           borderBottomColor: '#fafafa',
-          //           borderBottomWidth: 2,
-          //           flexDirection: 'row',
-          //         }}>
-          //         {/* <Text style={{flex: 1}}>{item.estado}</Text> */}
+          <FlatList
+            data={ToDoList}
+            renderItem={({item}) => (
+              <View
+                style={{
+                  paddingBottom: 22,
+                  paddingTop: 22,
+                  paddingHorizontal: 18,
+                }}>
+                <View
+                  style={{
+                    paddingBottom: 7,
+                    borderBottomColor: '#fafafa',
+                    borderBottomWidth: 2,
+                    flexDirection: 'row',
+                  }}>
+                  {/* <Text style={{flex: 1}}>{item.estado}</Text> */}
 
-          //         {item.estado == 0 ? (
-          //           <Image
-          //             style={{
-          //               flex: 1,
-          //               width: undefined,
-          //               height: undefined,
-          //               resizeMode: 'contain',
-          //             }}
-          //             source={require('../../../images/esperando.png')}
-          //           />
-          //         ) : (
-          //           <Image
-          //             style={{
-          //               flex: 1,
-          //               width: undefined,
-          //               height: undefined,
-          //               resizeMode: 'contain',
-          //             }}
-          //             source={require('../../../images/activado.png')}
-          //           />
-          //         )}
-          //         <Text
-          //           style={{
-          //             color: '#fafafa',
-          //             flex: 3,
+                  {item.estado == 0 ? (
+                    <Image
+                      style={{
+                        flex: 1,
+                        width: undefined,
+                        height: undefined,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../images/esperando.png')}
+                    />
+                  ) : (
+                    <Image
+                      style={{
+                        flex: 1,
+                        width: undefined,
+                        height: undefined,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../images/activado.png')}
+                    />
+                  )}
+                  <Text
+                    style={{
+                      color: '#fafafa',
+                      flex: 3,
 
-          //             textAlign: 'center',
-          //           }}>
-          //           {item.name}
-          //         </Text>
-          //       </View>
-          //     </View>
-          //   )}
-          // />
-          <Text>existen datos</Text>
+                      textAlign: 'center',
+                    }}>
+                    {item.name}
+                  </Text>
+                </View>
+              </View>
+            )}
+          />
         ) : (
+          // <Text>existen datos</Text>
           <Text>aun no tienes un todolist</Text>
         )}
       </View>

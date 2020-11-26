@@ -136,7 +136,7 @@ export const WatchFirebaseToDo = (props) => {
   try {
     firebase
       .database()
-      .ref('/usuarios/' + ObjUSR.uid + '/ToDoList')
+      .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
       .once('value', function (snapshot) {
         if (snapshot.val() !== null) {
           setToDoList(snapshot.val());
@@ -149,5 +149,17 @@ export const WatchFirebaseToDo = (props) => {
       });
   } catch (error) {
     console.log('error al consultar a la base de datos');
+  }
+};
+
+export const NewToDoTask = (nuevoTask, ObjUSR) => {
+  console.log('se sube');
+  try {
+    firebase
+      .database()
+      .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+      .set(nuevoTask);
+  } catch (error) {
+    console.log(error);
   }
 };

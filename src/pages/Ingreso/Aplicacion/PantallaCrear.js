@@ -10,10 +10,11 @@ import {
 } from 'react-native';
 import {BackHandler} from 'react-native';
 import {BotonIrAtras} from '../../../Modelo/FuncionesCelular';
-// import firebase from '../../../Modelo/FuncionesFirebaseAuth';
+import {NewToDoTask} from '../../../Modelo/FuncionesFirebaseAuth';
 import firebase from '../../../libs/Firebase';
 import {
   InputMultipleLine,
+  ItemMultipleSelect,
   ViewTitleLeft,
 } from '../../../ComponenteGlobales/SeccionMaquetacion';
 import {InputOneline} from '../../../Modelo/../ComponenteGlobales/SeccionMaquetacion';
@@ -21,57 +22,28 @@ import {InputOneline} from '../../../Modelo/../ComponenteGlobales/SeccionMaqueta
 import {FlatGrid} from 'react-native-super-grid';
 
 const PantallaCrear = (props) => {
+  useEffect(() => {
+    console.log('se cargo crear');
+  }, []);
+  const {WatchFirebaseToDo} = props;
   const {ToDoList} = props;
   const {setToDoList} = props;
   //seting user
   const {ObjUSR} = props;
-  const {SettingA} = props;
-  const [newAsettings, setnewAsettings] = useState(['q']);
-  const {SettingB} = props;
-  const {SettingC} = props;
+  const {SettingA} = props; // AREAS
+  const [newAsettings, setnewAsettings] = useState([]);
+  const {SettingB} = props; // PLATAFORMAS
+  const [newBsettings, setnewBsettings] = useState([]);
+  const {SettingC} = props; // HABILIDADES
+  const [newCsettings, setnewCsettings] = useState([]);
 
   ///////////////////// firebase pushear nuevos datos
-
-  //crear objeto
-  const datorandom = [
-    {
-      name: 'a',
-      operation: 'o',
-      estado: 0,
-      description: 'qeqe',
-      deploy: 'deployasdasda',
-      Skill: ['s', 'c', 'a', 'z'],
-      Platform: ['s', 'c', 'a', 'z'],
-      Area: ['s', 'c', 'a', 'z'],
-    },
-    {
-      name: 'b',
-      operation: 'o',
-      estado: 0,
-      description: 'qeqe',
-      deploy: 'deployasdasda',
-      Skill: ['s', 'c', 'a', 'z'],
-      Platform: ['s', 'c', 'a', 'z'],
-      Area: ['s', 'c', 'a', 'z'],
-    },
-  ];
 
   // pasar mi todo y subirlo ToDoList
 
   //1 setToDoList
-
-  //2 firebase
-  //   .database()
-  //   .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
-  //   .set(datorandom);
-
-  useEffect(() => {
-    console.log('se cargo crear');
-  }, []);
-
   const {ToOtherScreen, Posiciones} = props;
   const {nameScreen} = props;
-
   const [form, setform] = useState({
     name: '',
     description: '',
@@ -79,10 +51,73 @@ const PantallaCrear = (props) => {
     deploy: '',
   });
 
-  //get textos
+  //2 funciones obtener datos
   const actualizaTexto = (e, type) => {
     setform({...form, [type]: e});
-    console.log(form);
+  };
+  const actualizaItems = (
+    item,
+    tipo,
+    arrayStateRecibido,
+    SETarrayStateRecibido,
+  ) => {
+    arrayStateRecibido.includes(item)
+      ? SETarrayStateRecibido(arrayStateRecibido.filter((e) => e !== item))
+      : SETarrayStateRecibido([...arrayStateRecibido, item]);
+  };
+
+  //3 crear un objeto  y validar
+  const CrearTAREA = (form, newAsettings, newBsettings, newCsettings) => {
+    //nuevo
+    const res = {
+      name: form.name,
+      operation: form.operation,
+      estado: 0,
+      description: form.description,
+      deploy: form.deploy,
+      Skill: newCsettings,
+      Platform: newBsettings,
+      Area: newAsettings,
+    };
+
+    //valida
+    if (
+      res.name.length <= 6 ||
+      res.operation.length <= 6 ||
+      res.description.length <= 6 ||
+      res.deploy.length <= 6 ||
+      res.Skill.length > 8 ||
+      res.Platform.length > 1 ||
+      res.Area.length > 4
+    ) {
+      // console.log('objeto no valido!');
+      return false;
+    } else {
+      // console.log('objeto aceptado, valido!');
+      return res;
+    }
+  };
+  //emergencia :c
+  const [BANDERA, setBANDERA] = useState([]);
+  useEffect(() => {
+    NewToDoTask(ToDoList, ObjUSR);
+  }, [BANDERA]);
+
+  //4 subir objeto a firebase
+  const SubeDatosAFirebase = () => {
+    const res = CrearTAREA(form, newAsettings, newBsettings, newCsettings);
+    if (res == false) {
+      console.log('falla en el formulario , validacion no aceptada');
+    } else {
+      if (ToDoList == undefined) {
+        setToDoList([res]);
+        setBANDERA([res]); // CUANDO  CAMBIA ACTIVA USSEFECT
+      } else {
+        console.log('iterar');
+        setToDoList([...ToDoList, res]);
+        setBANDERA([...ToDoList, res]); // CUANDO  CAMBIA ACTIVA USSEFECT
+      }
+    }
   };
 
   return (
@@ -91,86 +126,56 @@ const PantallaCrear = (props) => {
         <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
         <View style={{height: 19}}></View>
         <InputOneline
-          texto="Nombre de proyecto"
+          texto="¿Como llamara su Proyecto?"
           tipo="name"
           fnc={actualizaTexto}
         />
         <InputMultipleLine
-          texto="Su breve descripcion  "
+          texto="¿Cual es el objetivo de su Proyecto?"
           tipo="description"
           fnc={actualizaTexto}
         />
         <InputMultipleLine
-          texto="Algunas Operaciones Necesarias"
+          texto="¿Algunas funciones esenciales?"
           tipo="operation"
           fnc={actualizaTexto}
         />
 
         <InputMultipleLine
-          texto="Como y como se Desplegara el proyecto"
+          texto="¿Donde se desplegara el Proyecto?"
           tipo="deploy"
           fnc={actualizaTexto}
         />
 
-        <Text>testeando que existen datos en array</Text>
-
-        {/* {newAsettings.map((elemento) => {
-          return <Text>{elemento}</Text>;
-        })} */}
-
-        <FlatGrid
-          style={{marginTop: 10, flex: 1}}
-          itemDimension={88}
-          data={['q', 's', 'd', 'c', 'zs']}
-          // data={settA}
-          renderItem={({item}) => {
-
-            return newAsettings.map((r) => {
-              {
-                return r == item ? (
-                  <Text style={{backgroundColor: 'white'}}>{item}</Text>
-                ) : (
-                  <Text>{item}</Text>
-                );
-              }
-            });
-          }}
-
-          // al click se agrega a una nueva lista
-          // se revisa si lo renderizado esta en la nueva lista
-          // si esta se le agrega color
-          // si no esta no se hace nada
-
-          // newAsettings.map((elemento) => {
-          //   item == elemento ? Alert.alert('iguales') : Alert.alert('nop')
-          //  })
-          // <Text>s</Text>
-
-          // return (
-          //   <View>
-          //     <Text>{item}</Text>
-          //   </View>
-          // );
-          // if (item) {
-          //   return item ? <Text>si</Text> : <Text>no</Text>;
-          // }
-          // newAsettings.map((r) => {
-          //   true ? (
-          //     <Text
-          //       onPress={() => {
-          //         setnewAsettings([...newAsettings, item]);
-          //         console.log(newAsettings);
-          //       }}>
-          //       {item}
-          //     </Text>
-          //   ) : (
-          //     console.log('no')
-          //   );
-          // })
+        <ItemMultipleSelect
+          titulo="Plataformas para desarrollo"
+          actuales={SettingB}
+          nuevosdatos={newBsettings}
+          setnuevosdatos={setnewBsettings}
+          fncactualizar={actualizaItems}
+        />
+        <ItemMultipleSelect
+          titulo="Conocimientos necesarios"
+          actuales={SettingC}
+          nuevosdatos={newCsettings}
+          setnuevosdatos={setnewCsettings}
+          fncactualizar={actualizaItems}
+        />
+        <ItemMultipleSelect
+          titulo="Areas del Proyecto"
+          actuales={SettingA}
+          nuevosdatos={newAsettings}
+          setnuevosdatos={setnewAsettings}
+          fncactualizar={actualizaItems}
         />
 
         <View>
-          <Button title="Este ToDo crearlo!" />
+          <Button
+            title="Crear ToDo"
+            onPress={() => {
+              SubeDatosAFirebase();
+            }}
+          />
           <Button
             title="Regresar"
             onPress={() => {

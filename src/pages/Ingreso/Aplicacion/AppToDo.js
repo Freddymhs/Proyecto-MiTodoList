@@ -25,12 +25,12 @@ export default function AppToDo(props) {
 
   //req 2 pendientes
   // const [stateListadoTareas, setstateListadoTareas] = useState({});
-  const [ToDoList, setToDoList] = useState();
+  const [ToDoList, setToDoList] = useState(undefined);
 
   //req 3 settings
-  var SettingA = ObjUSR.AreaUSR;
-  var SettingB = ObjUSR.PlatformUSR;
-  var SettingC = ObjUSR.SkillUSR;
+  var SettingA = ObjUSR.AreaUSR; // AREAS
+  var SettingB = ObjUSR.PlatformUSR; // PLATAFORMAS
+  var SettingC = ObjUSR.SkillUSR; // HABILIDADES
 
   //req 4 swaps , posicion actual y previo
   const [allScreen, setallScreen] = useState(0);
@@ -73,6 +73,7 @@ export default function AppToDo(props) {
     case 2:
       return (
         <PantallaCrear
+          WatchFirebaseToDo={WatchFirebaseToDo}
           ObjUSR={ObjUSR}
           ToDoList={ToDoList}
           setToDoList={setToDoList}
