@@ -10,7 +10,6 @@ import {WatchFirebaseToDo} from '../../../Modelo/FuncionesFirebaseAuth';
 import firebase from '../../../libs/Firebase';
 
 export default function AppToDo(props) {
-  
   useEffect(() => {
     WatchFirebaseToDo({ObjUSR, setToDoList});
   }, [allScreen]);

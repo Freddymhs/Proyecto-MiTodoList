@@ -68,8 +68,15 @@ export const Area2BtnInSmallView = (props) => {
 
 export const ViewTitleLeft = (props) => {
   return (
-    <View style={{width: '36%', marginBottom: 34}}>
+    <View style={{width: '36%', marginBottom: 34, marginHorizontal: 13}}>
       <Text style={{fontSize: 48, color: '#fafafa'}}>{props.children}</Text>
+    </View>
+  );
+};
+export const ViewTitleCenter = (props) => {
+  return (
+    <View style={{width: '100%', marginBottom: 34, marginHorizontal: 13}}>
+      <Text style={{fontSize: 34, color: '#fafafa'}}>{props.children}</Text>
     </View>
   );
 };
@@ -83,19 +90,71 @@ export const BtnAppPrimary = (props) => {
         fnBtn();
       }}
       style={{
-        backgroundColor: '#FFFFFF',
-        borderColor: '#E91E63',
-        borderWidth: 4,
-        padding: 20,
+        borderLeftColor: '#ffffff',
+        borderRightColor: '#ffffff',
+        borderBottomColor: '#ffffff',
+        borderBottomWidth: 3,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        elevation: 13,
+        backgroundColor: '#E91E63',
+        paddingVertical: 21,
+        marginVertical: 13,
         borderRadius: 13,
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal: 8,
+        marginHorizontal: 12,
       }}>
       <Text
         style={{
-          fontSize: 21,
-          color: '#E91E63',
+          fontWeight: 'bold',
+          fontSize: 34,
+          color: '#ffffff',
+          letterSpacing: 3,
+          fontStyle: 'normal',
+          includeFontPadding: true,
+          textShadowColor: true,
+          textShadowRadius: 2,
+          textShadowColor: '#E91E63',
+        }}>
+        {props.children}
+      </Text>
+    </Pressable>
+  );
+};
+export const BtnAppCoPrimary = (props) => {
+  const {fnBtn} = props;
+
+  return (
+    <Pressable
+      onPress={() => {
+        fnBtn();
+      }}
+      style={{
+        borderLeftColor: '#ffffff',
+        borderRightColor: '#ffffff',
+        borderBottomColor: '#ffffff',
+        borderBottomWidth: 1,
+        elevation: 13,
+        backgroundColor: '#b0003a',
+        paddingVertical: 21,
+        marginVertical: 13,
+        borderRadius: 13,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 12,
+      }}>
+      <Text
+        style={{
+          // fontWeight: 'bold',
+          fontSize: 34,
+          color: '#ffffff',
+          letterSpacing: 3,
+          fontStyle: 'normal',
+          includeFontPadding: true,
+          textShadowColor: true,
+          textShadowRadius: 2,
+          textShadowColor: '#E91E63',
         }}>
         {props.children}
       </Text>
@@ -111,27 +170,28 @@ export const BtnAppSecondary = (props) => {
         fnBtn();
       }}
       style={{
+        // elevation: 34,
         backgroundColor: '#E91E63',
-        borderColor: 'white',
-        shadowOffset: {
-          width: 0,
-          height: 3,
-        },
-        elevation: 0,
-        shadowOpacity: 0.34,
-        shadowRadius: 0,
-
-        // borderWidth: 4,
-        padding: 20,
-        borderRadius: 13,
+        paddingVertical: 21,
+        marginVertical: 13,
+        borderRadius: 34,
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal: 8,
+        marginHorizontal: 12,
       }}>
       <Text
         style={{
+          fontWeight: 'bold',
           fontSize: 21,
-          color: 'white',
+          color: '#ffffff',
+
+          letterSpacing: 3,
+
+          fontStyle: 'normal',
+          includeFontPadding: true,
+          textShadowColor: true,
+          textShadowRadius: 2,
+          textShadowColor: '#E91E63',
         }}>
         {props.children}
       </Text>

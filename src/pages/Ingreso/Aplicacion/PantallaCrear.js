@@ -4,6 +4,7 @@ import {
   Button,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   Text,
   TextInput,
   View,
@@ -13,6 +14,9 @@ import {BotonIrAtras} from '../../../Modelo/FuncionesCelular';
 import {NewToDoTask} from '../../../Modelo/FuncionesFirebaseAuth';
 import firebase from '../../../libs/Firebase';
 import {
+  BtnAppPrimary,
+  BtnAppCoPrimary,
+  BtnAppSecondary,
   InputMultipleLine,
   ItemMultipleSelect,
   ViewTitleLeft,
@@ -102,8 +106,6 @@ const PantallaCrear = (props) => {
       NewToDoTask(ToDoList, ObjUSR);
       ToOtherScreen(Posiciones.posList);
       setBANDERA(false);
-  
-
     } else {
       console.log('solo se recargo el componente');
     }
@@ -150,70 +152,78 @@ const PantallaCrear = (props) => {
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: '#E91E63', flex: 1}}>
-      <ScrollView>
-        <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
-        <View style={{height: 19}}></View>
-        <InputOneline
-          texto="¿Como llamara su Proyecto?"
-          tipo="name"
-          fnc={actualizaTexto}
-        />
-        <InputMultipleLine
-          texto="¿Cual es el objetivo de su Proyecto?"
-          tipo="description"
-          fnc={actualizaTexto}
-        />
-        <InputMultipleLine
-          texto="¿Algunas funciones esenciales?"
-          tipo="operation"
-          fnc={actualizaTexto}
-        />
-
-        <InputMultipleLine
-          texto="¿Donde se desplegara el Proyecto?"
-          tipo="deploy"
-          fnc={actualizaTexto}
-        />
-
-        <ItemMultipleSelect
-          titulo="Plataformas para desarrollo"
-          actuales={SettingB}
-          nuevosdatos={newBsettings}
-          setnuevosdatos={setnewBsettings}
-          fncactualizar={actualizaItems}
-        />
-        <ItemMultipleSelect
-          titulo="Conocimientos necesarios"
-          actuales={SettingC}
-          nuevosdatos={newCsettings}
-          setnuevosdatos={setnewCsettings}
-          fncactualizar={actualizaItems}
-        />
-        <ItemMultipleSelect
-          titulo="Areas del Proyecto"
-          actuales={SettingA}
-          nuevosdatos={newAsettings}
-          setnuevosdatos={setnewAsettings}
-          fncactualizar={actualizaItems}
-        />
-
-        <View>
-          <Button
-            title="Crear ToDo"
-            onPress={() => {
-              SubeDatosAFirebase();
-            }}
+    <>
+      <StatusBar hidden={true} />
+      <SafeAreaView style={{backgroundColor: '#E91E63', flex: 1}}>
+        <ScrollView>
+          <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
+          <View style={{height: 19}}></View>
+          <InputOneline
+            texto="¿Como llamara su Proyecto?"
+            tipo="name"
+            fnc={actualizaTexto}
           />
-          <Button
-            title="Regresar"
-            onPress={() => {
-              ToOtherScreen(Posiciones.posList);
-            }}
+          <InputMultipleLine
+            texto="¿Cual es el objetivo de su Proyecto?"
+            tipo="description"
+            fnc={actualizaTexto}
           />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <InputMultipleLine
+            texto="¿Algunas funciones esenciales?"
+            tipo="operation"
+            fnc={actualizaTexto}
+          />
+
+          <InputMultipleLine
+            texto="¿Donde se desplegara el Proyecto?"
+            tipo="deploy"
+            fnc={actualizaTexto}
+          />
+
+          <ItemMultipleSelect
+            titulo="Plataformas para desarrollo"
+            actuales={SettingB}
+            nuevosdatos={newBsettings}
+            setnuevosdatos={setnewBsettings}
+            fncactualizar={actualizaItems}
+          />
+          <ItemMultipleSelect
+            titulo="Conocimientos necesarios"
+            actuales={SettingC}
+            nuevosdatos={newCsettings}
+            setnuevosdatos={setnewCsettings}
+            fncactualizar={actualizaItems}
+          />
+          <ItemMultipleSelect
+            titulo="Areas del Proyecto"
+            actuales={SettingA}
+            nuevosdatos={newAsettings}
+            setnuevosdatos={setnewAsettings}
+            fncactualizar={actualizaItems}
+          />
+
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'flex-end',
+            }}>
+            <BtnAppPrimary
+              fnBtn={() => {
+                SubeDatosAFirebase();
+              }}>
+              Crear ToDo
+            </BtnAppPrimary>
+
+            <BtnAppCoPrimary
+              fnBtn={() => {
+                ToOtherScreen(Posiciones.posList);
+              }}>
+              Regresar
+            </BtnAppCoPrimary>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
