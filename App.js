@@ -66,6 +66,7 @@ export default function App() {
   };
 
   // console.log(ObjUSR);
+  console.disableYellowBox = true;
   console.log('##################APP####################');
   return (
     <>

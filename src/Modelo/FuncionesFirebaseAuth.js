@@ -165,3 +165,43 @@ export const NewToDoTask = (nuevoTask, ObjUSR) => {
     console.log(error);
   }
 };
+
+export const cambiarEstadoTarea = (props) => {
+  const {ObjUSR, stateSelected, ToDoList} = props;
+  let findPostion;
+  let booleano;
+  let cambio;
+  ToDoList.map((x, index) => {
+    x.name == stateSelected.name
+      ? ((findPostion = index), (booleano = x.estado))
+      : 'no existe';
+  });
+
+  if (booleano == 1) {
+    cambio = 0;
+  } else {
+    cambio = 1;
+  }
+  firebase
+    .database()
+    .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+    .child(findPostion)
+    .update({
+      estado: cambio,
+    });
+};
+
+export const EliminarTarea = (props) => {
+  const {ObjUSR, stateSelected, ToDoList} = props;
+  let findPostion;
+
+  ToDoList.map((x, index) => {
+    x.name == stateSelected.name ? (findPostion = index) : 'no existe';
+  });
+
+  firebase
+    .database()
+    .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+    .child(findPostion)
+    .remove();
+};

@@ -20,7 +20,11 @@ import {
   ViewTitleCenter,
   BtnAppCoPrimary,
 } from '../../../ComponenteGlobales/SeccionMaquetacion';
-import {SalirFBauth} from '../../../Modelo/FuncionesFirebaseAuth';
+import {
+  cambiarEstadoTarea,
+  EliminarTarea,
+  SalirFBauth,
+} from '../../../Modelo/FuncionesFirebaseAuth';
 import Modal from 'react-native-modal';
 import {BtnAppPrimary} from '../../../ComponenteGlobales/SeccionMaquetacion';
 
@@ -49,13 +53,6 @@ const PantallaListado = (props) => {
     // userRef.remove()
   }, []);
 
-  // onLongPress={() => {
-  //   Alert.alert(item.name);
-  // }}
-  //modal
-
-  // const [modalVisible, setModalVisible] = useState(false);
-
   const [state, setstate] = useState({isModalVisible: ''});
   const toggleModal = (item) => {
     if (item) {
@@ -73,13 +70,14 @@ const PantallaListado = (props) => {
         <View style={{backgroundColor: '#E91E63', flex: 1}}>
           {stateSelected ? (
             <>
+              {/* xd */}
               <View style={{flex: 1}}>
                 <ScrollView>
                   <ViewTitleCenter>
                     {stateSelected.estado == 0 ? (
-                      <Text>Proyecto en Espera ⏱</Text>
+                      <Text>En Espera ⏱</Text>
                     ) : (
-                      <Text>Proyecto en Desarrollo 🤞</Text>
+                      <Text>En Desarrollo</Text>
                     )}
                   </ViewTitleCenter>
                   <View style={{marginVertical: 54}}>
@@ -170,7 +168,6 @@ const PantallaListado = (props) => {
                       {stateSelected.deploy}
                     </Text>
                   </View>
-
                   <View style={{marginVertical: 54, flexDirection: 'row'}}>
                     <View style={{flex: 1}}>
                       <Text
@@ -185,24 +182,29 @@ const PantallaListado = (props) => {
                         Plataforma para Desarrollo
                       </Text>
                       <ScrollView>
-                        <FlatList
-                          data={stateSelected.Platform}
-                          renderItem={({item}) => (
-                            <Text
-                              style={{
-                                alignSelf: 'center',
-                                paddingHorizontal: 9,
-                                fontSize: 21,
-                                color: 'white',
-                                marginVertical: 3,
-                              }}>
-                              {item}
-                            </Text>
-                          )}
-                        />
+                        {stateSelected.Platform ? (
+                          <FlatList
+                            data={stateSelected.Platform}
+                            renderItem={({item}) => (
+                              <Text
+                                style={{
+                                  alignSelf: 'center',
+                                  paddingHorizontal: 9,
+                                  fontSize: 21,
+                                  color: 'white',
+                                  marginVertical: 3,
+                                }}>
+                                {item}
+                              </Text>
+                            )}
+                          />
+                        ) : (
+                          <></>
+                        )}
                       </ScrollView>
                     </View>
                   </View>
+
                   <View
                     style={{
                       marginVertical: 54,
@@ -222,21 +224,25 @@ const PantallaListado = (props) => {
                         Skills
                       </Text>
                       <ScrollView>
-                        <FlatList
-                          data={stateSelected.Skill}
-                          renderItem={({item}) => (
-                            <Text
-                              style={{
-                                alignSelf: 'center',
-                                paddingHorizontal: 9,
-                                fontSize: 21,
-                                color: 'white',
-                                marginVertical: 3,
-                              }}>
-                              {item}
-                            </Text>
-                          )}
-                        />
+                        {stateSelected.Skill ? (
+                          <FlatList
+                            data={stateSelected.Skill}
+                            renderItem={({item}) => (
+                              <Text
+                                style={{
+                                  alignSelf: 'center',
+                                  paddingHorizontal: 9,
+                                  fontSize: 21,
+                                  color: 'white',
+                                  marginVertical: 3,
+                                }}>
+                                {item}
+                              </Text>
+                            )}
+                          />
+                        ) : (
+                          <></>
+                        )}
                       </ScrollView>
                     </View>
                     <View style={{flex: 1}}>
@@ -252,40 +258,59 @@ const PantallaListado = (props) => {
                         Area
                       </Text>
                       <ScrollView>
-                        <FlatList
-                          data={stateSelected.Area}
-                          renderItem={({item}) => (
-                            <Text
-                              style={{
-                                alignSelf: 'center',
-                                paddingHorizontal: 9,
-                                fontSize: 21,
-                                color: 'white',
-                                marginVertical: 3,
-                              }}>
-                              {item}
-                            </Text>
-                          )}
-                        />
+                        {stateSelected.Area ? (
+                          <FlatList
+                            data={stateSelected.Area}
+                            renderItem={({item}) => (
+                              <Text
+                                style={{
+                                  alignSelf: 'center',
+                                  paddingHorizontal: 9,
+                                  fontSize: 21,
+                                  color: 'white',
+                                  marginVertical: 3,
+                                }}>
+                                {item}
+                              </Text>
+                            )}
+                          />
+                        ) : (
+                          <></>
+                        )}
                       </ScrollView>
                     </View>
                   </View>
                 </ScrollView>
               </View>
-
+              {/* xd */}
               <View style={{flex: 0.5}}>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex: 1}}>
-                    <BtnAppPrimary>Activar</BtnAppPrimary>
+                    <BtnAppPrimary
+                      fnBtn={() => {
+                        cambiarEstadoTarea({ObjUSR, stateSelected, ToDoList});
+                        toggleModal();
+                        // WatchFirebaseToDo({ObjUSR, setToDoList});
+                      }}>
+                      {stateSelected.estado == 1 ? 'pausar' : 'activar'}
+                    </BtnAppPrimary>
                   </View>
                   <View style={{flex: 1}}>
-                    <BtnAppSecondary>Eliminar</BtnAppSecondary>
+                    <BtnAppSecondary
+                      fnBtn={() => {
+                        EliminarTarea({ObjUSR, stateSelected, ToDoList});
+                        toggleModal();
+                        // WatchFirebaseToDo({ObjUSR, setToDoList});
+                      }}>
+                      Eliminar
+                    </BtnAppSecondary>
                   </View>
                 </View>
                 <View>
                   <BtnAppCoPrimary
                     fnBtn={() => {
                       toggleModal();
+                      WatchFirebaseToDo({ObjUSR, setToDoList});
                     }}>
                     Regresar
                   </BtnAppCoPrimary>
@@ -307,60 +332,72 @@ const PantallaListado = (props) => {
             <ViewTitleLeft>{nameScreen}</ViewTitleLeft>
             <View>
               {ToDoList ? (
+                // ToDoList.map((x) => {
+                //   return (
+                //     <Text style={{color: 'black', backgroundColor: 'white'}}>
+                //       qwerty
+                //     </Text>
+                //   );
+                // })
                 <FlatList
+                  keyExtractor={(item, index) => 'key' + index}
                   data={ToDoList}
-                  renderItem={({item}) => (
-                    <TouchableOpacity
-                      onLongPress={() => {
-                        toggleModal(item);
-                      }}>
-                      <View
-                        style={{
-                          paddingBottom: 22,
-                          paddingTop: 22,
-                          paddingHorizontal: 18,
+                  renderItem={({item}) => {
+                    return item ? (
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          toggleModal(item);
                         }}>
                         <View
                           style={{
-                            paddingBottom: 7,
-                            borderBottomColor: '#fafafa',
-                            borderBottomWidth: 2,
-                            flexDirection: 'row',
+                            paddingBottom: 22,
+                            paddingTop: 22,
+                            paddingHorizontal: 18,
                           }}>
-                          {item.estado == 0 ? (
-                            <Image
-                              style={{
-                                flex: 1,
-                                width: undefined,
-                                height: undefined,
-                                resizeMode: 'contain',
-                              }}
-                              source={require('../../../images/esperando.png')}
-                            />
-                          ) : (
-                            <Image
-                              style={{
-                                flex: 1,
-                                width: undefined,
-                                height: undefined,
-                                resizeMode: 'contain',
-                              }}
-                              source={require('../../../images/activado.png')}
-                            />
-                          )}
-                          <Text
+                          <View
                             style={{
-                              color: '#fafafa',
-                              flex: 6,
-                              textAlign: 'center',
-                              fontSize: 24,
+                              paddingBottom: 7,
+                              borderBottomColor: '#fafafa',
+                              borderBottomWidth: 2,
+                              flexDirection: 'row',
                             }}>
-                            {item.name}
-                          </Text>
+                            {item.estado == 0 ? (
+                              <Image
+                                style={{
+                                  flex: 1,
+                                  width: undefined,
+                                  height: undefined,
+                                  resizeMode: 'contain',
+                                }}
+                                source={require('../../../images/esperando.png')}
+                              />
+                            ) : (
+                              <Image
+                                style={{
+                                  flex: 1,
+                                  width: undefined,
+                                  height: undefined,
+                                  resizeMode: 'contain',
+                                }}
+                                source={require('../../../images/activado.png')}
+                              />
+                            )}
+                            <Text
+                              style={{
+                                color: '#fafafa',
+                                flex: 6,
+                                textAlign: 'center',
+                                fontSize: 24,
+                              }}>
+                              {item.name}
+                            </Text>
+                          </View>
                         </View>
-                      </View>
-                    </TouchableOpacity>
-                  )}
+                      </TouchableOpacity>
+                    ) : (
+                      <></>
+                    );
+                  }}
                 />
               ) : (
                 <>
@@ -408,77 +445,9 @@ const PantallaListado = (props) => {
             <Text>Log Out 🤚</Text>
           </BtnAppSecondary>
         </View>
-
-        {/* <TouchableHighlight
-          style={styles.openButton}
-          onPress={() => {
-            setModalVisible(true);
-          }}>
-          <Text style={styles.textStyle}>Show Modal</Text>
-        </TouchableHighlight> */}
       </SafeAreaView>
-      {/* <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-
-            <TouchableHighlight
-              style={{...styles.openButton, backgroundColor: '#2196F3'}}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal> */}
     </>
   );
 };
 
 export default PantallaListado;
-
-// const styles = StyleSheet.create({
-//   centeredView: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginTop: 22,
-//   },
-//   modalView: {
-//     margin: 20,
-//     backgroundColor: 'white',
-//     borderRadius: 20,
-//     padding: 35,
-//     alignItems: 'center',
-//     shadowColor: '#000',
-//     shadowOffset: {
-//       width: 0,
-//       height: 2,
-//     },
-//     shadowOpacity: 0.25,
-//     shadowRadius: 3.84,
-//     elevation: 5,
-//   },
-//   openButton: {
-//     backgroundColor: '#F194FF',
-//     borderRadius: 20,
-//     padding: 10,
-//     elevation: 2,
-//   },
-//   textStyle: {
-//     color: 'white',
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//   },
-//   modalText: {
-//     marginBottom: 15,
-//     textAlign: 'center',
-//   },
-// });
