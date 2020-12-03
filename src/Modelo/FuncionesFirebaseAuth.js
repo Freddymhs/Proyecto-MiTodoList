@@ -115,3 +115,93 @@ export const ConfigPerfilUsuario = (uid, setObjUSR) => {
       setObjUSR(snapshot.val());
     });
 };
+
+// //obten todos los datos del usuario dentro de la app
+// export const SolicitaDatosUser = async ({uid, setUsuario}) => {
+//   firebase
+//     .database()
+//     .ref('/usuarios/' + uid)
+//     .once('value', function (snap) {
+//       setUsuario(snap.val());
+//     });
+// };
+
+// //
+
+export const WatchFirebaseToDo = (props) => {
+  console.log('=====================================================x====');
+  const {ObjUSR} = props;
+  const {setToDoList} = props;
+
+  try {
+    firebase
+      .database()
+      .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+      .once('value', function (snapshot) {
+        if (snapshot.val() !== null) {
+          setToDoList(snapshot.val());
+
+          //pasa listado tareas
+        } else {
+          console.log('sin datos');
+          setToDoList(undefined);
+        }
+      });
+  } catch (error) {
+    console.log('error al consultar a la base de datos');
+  }
+};
+
+export const NewToDoTask = (nuevoTask, ObjUSR) => {
+  try {
+    firebase
+      .database()
+      .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+      .set(nuevoTask);
+    Alert.alert(
+      'Nuevo Proyecto Agregado!' + '\n ' + nuevoTask[nuevoTask.length - 1].name,
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cambiarEstadoTarea = (props) => {
+  const {ObjUSR, stateSelected, ToDoList} = props;
+  let findPostion;
+  let booleano;
+  let cambio;
+  ToDoList.map((x, index) => {
+    x.name == stateSelected.name
+      ? ((findPostion = index), (booleano = x.estado))
+      : 'no existe';
+  });
+
+  if (booleano == 1) {
+    cambio = 0;
+  } else {
+    cambio = 1;
+  }
+  firebase
+    .database()
+    .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+    .child(findPostion)
+    .update({
+      estado: cambio,
+    });
+};
+
+export const EliminarTarea = (props) => {
+  const {ObjUSR, stateSelected, ToDoList} = props;
+  let findPostion;
+
+  ToDoList.map((x, index) => {
+    x.name == stateSelected.name ? (findPostion = index) : 'no existe';
+  });
+
+  firebase
+    .database()
+    .ref('/usuarios/' + ObjUSR.uid + '/ToDoList/')
+    .child(findPostion)
+    .remove();
+};

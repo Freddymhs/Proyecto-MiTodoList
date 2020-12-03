@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   Alert,
+  PixelRatio,
 } from 'react-native';
 // mis componentes
 import PresentacionApp from './src/pages/PreIngreso/PresentacionAPP';
@@ -65,6 +66,7 @@ export default function App() {
   };
 
   // console.log(ObjUSR);
+  console.disableYellowBox = true;
   console.log('##################APP####################');
   return (
     <>
