@@ -1,4 +1,4 @@
-package com.proyecto_mitodolist;
+package dev.fmarcos_todolist;
 
 import com.facebook.react.ReactActivity;
 
